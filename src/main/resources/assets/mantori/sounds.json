@@ -1,0 +1,9 @@
+{
+  "wing_flap": {
+    "category": "entities",
+    "subtitle":"mantori.wing_flap",
+    "sounds": [
+      "mantori:wing_flap"
+    ]
+  }
+}
