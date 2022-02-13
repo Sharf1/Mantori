@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mantori:honeydew_bottle"
+    },
+    {
+      "item": "mantori:cooked_aphid_meat"
+    }
+  ],
+  "result": {
+    "item": "mantori:honeyglazed_aphid_meat"
+  }
+}

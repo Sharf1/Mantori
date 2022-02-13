@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "mantori:aphid_meat"
+  },
+  "result": "mantori:cooked_aphid_meat",
+  "experience": 0.35,
+  "cookingtime": 600
+}
