@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    " *",
+    " *"
+  ],
+  "key": {
+    "#": {
+      "item": "mantori:chitin_spike"
+    },
+    "*": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "mantori:chitin_hoe"
+  }
+}
