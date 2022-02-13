@@ -1,6 +1,7 @@
 package net.mantori;
 
 import net.fabricmc.api.ModInitializer;
+import net.mantori.entity.ModEntityTypes;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
 import org.slf4j.Logger;
@@ -13,8 +14,8 @@ public class Mantori implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
         ModItems.registerModItems();
         ModSounds.registerSounds();
+        ModEntityTypes.registerModEntities();
     }
 }

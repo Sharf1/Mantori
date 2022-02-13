@@ -2,14 +2,12 @@ package net.mantori.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.mantori.Mantori;
+import net.mantori.entity.ModEntityTypes;
 import net.mantori.item.custom.ModAxeItem;
 import net.mantori.item.custom.ModHoeItem;
 import net.mantori.item.custom.ModPickaxeItem;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ShovelItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -47,6 +45,8 @@ public class ModItems {
     public static final Item CHITIN_BOOTS = registerItem("chitin_boots",
             new ArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.FEET,
                     new FabricItemSettings().group((ModItemGroup.MANTORI))));
+    public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 1, 1,
+            new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(Mantori.MOD_ID, name), item);
