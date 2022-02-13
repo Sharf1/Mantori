@@ -79,7 +79,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mantori:chitin_shard"
+          "name": "mantori:chitin_spike"
         }
       ],
       "conditions": [
