@@ -17,6 +17,15 @@ public class ModItems {
     public static final Item CHITIN_SPIKE = registerItem("chitin_spike",
             new Item(new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
+    public static final Item APHID_MEAT = registerItem("aphid_meat",
+            new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.APHID_MEAT)));
+    public static final Item COOKED_APHID_MEAT = registerItem("cooked_aphid_meat",
+            new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.COOKED_APHID_MEAT)));
+    public static final Item HONEYDEW_BOTTLE = registerItem("honeydew_bottle",
+            new HoneyBottleItem(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYDEW_BOTTLE)));
+    public static final Item HONEYGLAZED_APHID_MEAT = registerItem("honeyglazed_aphid_meat",
+            new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYGLAZED_APHID_MEAT)));
+
     public static final Item CHITIN_SWORD = registerItem("chitin_sword",
             new SwordItem(ModToolMaterial.CHITIN, 4, -2.4f,
                     new FabricItemSettings().group(ModItemGroup.MANTORI)));
