@@ -1,5 +1,13 @@
 {
   "item.mantori.chitin": "Chitin",
+  "item.mantori.chitin_spike": "Chitin Spike",
+
+  "item.mantori.chitin_sword": "Chitin Sword",
+  "item.mantori.chitin_axe": "Chitin Axe",
+  "item.mantori.chitin_pickaxe": "Chitin Pickaxe",
+  "item.mantori.chitin_shovel": "Chitin Shovel",
+  "item.mantori.chitin_hoe": "Chitin Hoe",
+
   "item.mantori.chitin_helmet": "Chitin Helmet",
   "item.mantori.chitin_chestplate": "Chitin Chestplate",
   "item.mantori.chitin_leggings": "Chitin Leggings",
