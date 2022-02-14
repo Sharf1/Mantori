@@ -54,7 +54,8 @@ public class ModItems {
     public static final Item CHITIN_BOOTS = registerItem("chitin_boots",
             new ArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.FEET,
                     new FabricItemSettings().group((ModItemGroup.MANTORI))));
-    public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 1, 1,
+
+    public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 11705790, 10841541,
             new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
     private static Item registerItem(String name, Item item) {
