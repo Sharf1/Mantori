@@ -2,6 +2,7 @@ package net.mantori.entity;
 
 import com.google.common.collect.UnmodifiableIterator;
 import net.mantori.entity.goal.AphidBondWithPlayerGoal;
+import net.mantori.sounds.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -203,7 +204,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
 
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         if (fallDistance > 1.0F) {
-            this.playSound(SoundEvents.ENTITY_HORSE_LAND, 0.4F, 1.0F);
+            this.playSound(ModSounds.LAND, 0.4F, 1.0F);
         }
 
         int i = this.computeFallDamage(fallDistance, damageMultiplier);
@@ -290,19 +291,19 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
                 if (this.soundTicks > 5 && this.soundTicks % 3 == 0) {
                     this.playWalkSound(blockSoundGroup);
                 } else if (this.soundTicks <= 5) {
-                    this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+                    this.playSound(ModSounds.FOOTSTEPS_WOOD, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
                 }
             } else if (blockSoundGroup == BlockSoundGroup.WOOD) {
-                this.playSound(SoundEvents.ENTITY_HORSE_STEP_WOOD, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+                this.playSound(ModSounds.FOOTSTEPS_WOOD, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
             } else {
-                this.playSound(SoundEvents.ENTITY_HORSE_STEP, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
+                this.playSound(ModSounds.FOOTSTEPS, blockSoundGroup.getVolume() * 0.15F, blockSoundGroup.getPitch());
             }
 
         }
     }
 
     protected void playWalkSound(BlockSoundGroup group) {
-        this.playSound(SoundEvents.ENTITY_HORSE_GALLOP, group.getVolume() * 0.15F, group.getPitch());
+        this.playSound(ModSounds.GALLOP, group.getVolume() * 0.15F, group.getPitch());
     }
 
     public static DefaultAttributeContainer.Builder createBaseHorseAttributes() {
@@ -659,7 +660,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
     }
 
     protected void playJumpSound() {
-        this.playSound(SoundEvents.ENTITY_HORSE_JUMP, 0.4F, 1.0F);
+        this.playSound(ModSounds.JUMP, 0.4F, 1.0F);
     }
 
     public void writeCustomDataToNbt(NbtCompound nbt) {

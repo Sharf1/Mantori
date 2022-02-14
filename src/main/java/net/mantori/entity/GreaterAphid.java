@@ -1,5 +1,6 @@
 package net.mantori.entity;
 
+import net.mantori.sounds.ModSounds;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -126,34 +127,34 @@ public class GreaterAphid extends BaseAphidEntity {
     protected void playWalkSound(BlockSoundGroup group) {
         super.playWalkSound(group);
         if (this.random.nextInt(10) == 0) {
-            this.playSound(SoundEvents.ENTITY_HORSE_BREATHE, group.getVolume() * 0.6F, group.getPitch());
+            this.playSound(ModSounds.BREATHE, group.getVolume() * 0.6F, group.getPitch());
         }
 
     }
 
     protected SoundEvent getAmbientSound() {
         super.getAmbientSound();
-        return SoundEvents.ENTITY_HORSE_AMBIENT;
+        return ModSounds.AMBIENT;
     }
 
     protected SoundEvent getDeathSound() {
         super.getDeathSound();
-        return SoundEvents.ENTITY_HORSE_DEATH;
+        return ModSounds.DEATH;
     }
 
     @Nullable
     protected SoundEvent getEatSound() {
-        return SoundEvents.ENTITY_HORSE_EAT;
+        return ModSounds.EAT;
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
         super.getHurtSound(source);
-        return SoundEvents.ENTITY_HORSE_HURT;
+        return ModSounds.HURT;
     }
 
     protected SoundEvent getAngrySound() {
         super.getAngrySound();
-        return SoundEvents.ENTITY_HORSE_ANGRY;
+        return ModSounds.ANGRY;
     }
 
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
