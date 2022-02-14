@@ -18,5 +18,19 @@
   "item.mantori.chitin_leggings": "Chitin Leggings",
   "item.mantori.chitin_boots": "Chitin Boots",
 
+
+  "mantori.wing_flap": "Wings flap",
+  "mantori.ambient": "Aphid shrieks",
+  "mantori.angry": "Aphid shrieks angrily",
+  "mantori.breathe": "Aphid breathes",
+  "mantori.death": "Aphid dies",
+  "mantori.eat": "Aphid eats",
+  "mantori.gallop": "Greater Aphid gallops",
+  "mantori.hurt": "Aphid hurts",
+  "mantori.jump": "Greater Aphid jumps",
+  "mantori.land": "Greater Aphid lands",
+  "mantori.footstep": "Footsteps",
+
+
   "itemGroup.mantori.mantori": "Aphid Additions"
 }

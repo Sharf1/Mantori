@@ -1,9 +1,98 @@
 {
-  "wing_flap": {
-    "category": "entities",
-    "subtitle":"mantori.wing_flap",
+  "aphid.wing_flap": {
+    "subtitle": "mantori.wing_flap",
     "sounds": [
-      "mantori:wing_flap"
+      "mantori:wing_flap1",
+      "mantori:wing_flap2"
+    ]
+  },
+  "aphid.ambient": {
+    "subtitle": "mantori.ambient",
+    "sounds": [
+      "mantori:ambient1",
+      "mantori:ambient2",
+      "mantori:ambient3"
+    ]
+  },
+  "aphid.angry": {
+    "subtitle": "mantori.angry",
+    "sounds": [
+      "mantori:angry"
+    ]
+  },
+  "aphid.breathe": {
+    "subtitle": "mantori.breathe",
+    "sounds": [
+      "mantori:breathe1",
+      "mantori:breathe2",
+      "mantori:breathe3"
+    ]
+  },
+  "aphid.death": {
+    "subtitle": "mantori.death",
+    "sounds": [
+      "mantori:death"
+    ]
+  },
+  "aphid.eat": {
+    "subtitle": "mantori.eat",
+    "sounds": [
+      "mantori:eat1",
+      "mantori:eat2",
+      "mantori:eat3",
+      "mantori:eat4"
+    ]
+  },
+  "aphid.gallop": {
+    "subtitle": "mantori.gallop",
+    "sounds": [
+      "mantori:gallop1",
+      "mantori:gallop2",
+      "mantori:gallop3"
+    ]
+  },
+  "aphid.hurt": {
+    "subtitle": "mantori.hurt",
+    "sounds": [
+      "mantori:hurt1",
+      "mantori:hurt2",
+      "mantori:hurt3",
+      "mantori:hurt4",
+      "mantori:hurt5"
+    ]
+  },
+  "aphid.jump": {
+    "subtitle": "mantori.jump",
+    "sounds": [
+      "mantori:jump"
+    ]
+  },
+  "aphid.land": {
+    "subtitle": "mantori.land",
+    "sounds": [
+      "mantori:land"
+    ]
+  },
+  "aphid.footstep": {
+    "subtitle": "mantori.footstep",
+    "sounds": [
+      "mantori:soft1",
+      "mantori:soft2",
+      "mantori:soft3",
+      "mantori:soft4",
+      "mantori:soft5",
+      "mantori:soft6"
+    ]
+  },
+  "aphid.footstep.wood": {
+    "subtitle": "mantori.footstep",
+    "sounds": [
+      "mantori:wood1",
+      "mantori:wood2",
+      "mantori:wood3",
+      "mantori:wood4",
+      "mantori:wood5",
+      "mantori:wood6"
     ]
   }
 }
