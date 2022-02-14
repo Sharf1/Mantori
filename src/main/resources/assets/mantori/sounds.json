@@ -4,7 +4,7 @@
     "sounds": [
       "mantori:wing_flap1",
       {"name": "mantori:wing_flap2",
-      "volume": 0.5}
+      "volume": 0.8}
     ]
   },
   "aphid.ambient": {
