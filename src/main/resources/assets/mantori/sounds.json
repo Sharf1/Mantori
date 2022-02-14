@@ -85,7 +85,7 @@
     ]
   },
   "aphid.footstep.wood": {
-    "subtitle": "mantori.footstep",
+    "subtitle": "mantori.footstep.wood",
     "sounds": [
       "mantori:wood1",
       "mantori:wood2",
