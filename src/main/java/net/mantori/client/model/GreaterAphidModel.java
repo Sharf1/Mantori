@@ -180,11 +180,11 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
 
     @Override
     protected Iterable<ModelPart> getHeadParts() {
-        return ImmutableList.of(head, neck);
+        return ImmutableList.of();
     }
 
     @Override
     protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(body, tail, right_front_leg, right_hind_leg, left_front_leg, left_hind_leg);
+        return ImmutableList.of(body, tail, right_front_leg, right_hind_leg, left_front_leg, left_hind_leg, head, neck);
     }
 }
