@@ -13,13 +13,13 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 @Environment(EnvType.CLIENT)
-public class MontoriModelLayers {
+public class ModModelLayers {
     private static final String MAIN = "main";
     private static final Set<EntityModelLayer> LAYERS = Sets.newHashSet();
 
     public static final EntityModelLayer GREATER_APHID = registerMain("greater_aphid");
 
-    public MontoriModelLayers() {
+    public ModModelLayers() {
     }
 
     private static EntityModelLayer registerMain(String id) {

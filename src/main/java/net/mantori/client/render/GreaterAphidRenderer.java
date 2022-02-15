@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.mantori.Mantori;
-import net.mantori.client.MontoriModelLayers;
+import net.mantori.client.ModModelLayers;
 import net.mantori.client.model.GreaterAphidModel;
 import net.mantori.client.render.layer.GreaterAphidMarkingRenderer;
 import net.mantori.entity.AphidColor;
@@ -22,7 +22,7 @@ public class GreaterAphidRenderer extends BaseAphidRenderer<GreaterAphid, Greate
     });
 
     public GreaterAphidRenderer(EntityRendererFactory.Context context) {
-        super(context, new GreaterAphidModel(context.getPart(MontoriModelLayers.GREATER_APHID)), 1.1F);
+        super(context, new GreaterAphidModel(context.getPart(ModModelLayers.GREATER_APHID)), 1.1F);
         this.addFeature(new GreaterAphidMarkingRenderer(this));
     }
 
