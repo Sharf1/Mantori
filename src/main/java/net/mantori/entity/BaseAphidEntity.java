@@ -631,7 +631,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
                     if (g > 0.0F) {
                         float h = MathHelper.sin(this.getYaw() * 0.017453292F);
                         float i = MathHelper.cos(this.getYaw() * 0.017453292F);
-                        this.setVelocity(this.getVelocity().add((double)(-0.4F * h * this.jumpStrength), 0.0D, (double)(0.4F * i * this.jumpStrength)));
+                        this.setVelocity(this.getVelocity().add(-0.4F * h * this.jumpStrength, 0.0D, 0.4F * i * this.jumpStrength));
                     }
 
                     this.jumpStrength = 0.0F;
@@ -640,7 +640,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
                 this.airStrafingSpeed = this.getMovementSpeed() * 0.1F;
                 if (this.isLogicalSideForUpdatingMovement()) {
                     this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-                    super.travel(new Vec3d((double)f, movementInput.y, (double)g));
+                    super.travel(new Vec3d(f, movementInput.y, g));
                 } else if (livingEntity instanceof PlayerEntity) {
                     this.setVelocity(Vec3d.ZERO);
                 }
@@ -672,11 +672,6 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         if (this.getOwnerUuid() != null) {
             nbt.putUuid("Owner", this.getOwnerUuid());
         }
-
-        if (!this.items.getStack(0).isEmpty()) {
-            nbt.put("SaddleItem", this.items.getStack(0).writeNbt(new NbtCompound()));
-        }
-
     }
 
     public void readCustomDataFromNbt(NbtCompound nbt) {
@@ -696,15 +691,6 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         if (uUID != null) {
             this.setOwnerUuid(uUID);
         }
-
-        if (nbt.contains("SaddleItem", 10)) {
-            ItemStack itemStack = ItemStack.fromNbt(nbt.getCompound("SaddleItem"));
-            if (itemStack.isOf(Items.SADDLE)) {
-                this.items.setStack(0, itemStack);
-            }
-        }
-
-        this.updateSaddle();
     }
 
     public boolean canBreedWith(AnimalEntity other) {
@@ -755,11 +741,10 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         }
 
         if (strength >= 90) {
-            this.jumpStrength = 1.0F;
+            this.jumpStrength = 1.5F;
         } else {
-            this.jumpStrength = 0.4F + 0.4F * (float) strength / 90.0F;
+            this.jumpStrength = 0.7F + 0.7F * (float) strength / 90.0F;
         }
-
     }
 
     public boolean canJump() {
@@ -819,7 +804,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
     }
 
     protected float getChildHealthBonus() {
-        return 15.0F + (float)this.random.nextInt(8) + (float)this.random.nextInt(9);
+        return 20.0F + (float)this.random.nextInt(10) + (float)this.random.nextInt(10);
     }
 
     protected double getChildJumpStrengthBonus() {

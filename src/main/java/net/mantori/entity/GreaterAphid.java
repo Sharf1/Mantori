@@ -13,10 +13,8 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
@@ -54,14 +52,6 @@ public class GreaterAphid extends BaseAphidEntity {
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         nbt.putInt("Variant", this.getVariant());
-        if (!this.items.getStack(1).isEmpty()) {
-            nbt.put("ArmorItem", this.items.getStack(1).writeNbt(new NbtCompound()));
-        }
-
-    }
-
-    public ItemStack getArmorType() {
-        return this.getEquippedStack(EquipmentSlot.CHEST);
     }
 
     private void equipArmor(ItemStack stack) {
@@ -72,14 +62,6 @@ public class GreaterAphid extends BaseAphidEntity {
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         this.setVariant(nbt.getInt("Variant"));
-        if (nbt.contains("ArmorItem", 10)) {
-            ItemStack itemStack = ItemStack.fromNbt(nbt.getCompound("ArmorItem"));
-            if (!itemStack.isEmpty() && this.isHorseArmor(itemStack)) {
-                this.items.setStack(1, itemStack);
-            }
-        }
-
-        this.updateSaddle();
     }
 
     private void setVariant(int variant) {
@@ -87,41 +69,19 @@ public class GreaterAphid extends BaseAphidEntity {
     }
 
     private int getVariant() {
-        return (Integer) this.dataTracker.get(VARIANT);
+        return this.dataTracker.get(VARIANT);
     }
 
-    private void setVariant(HorseColor color, HorseMarking marking) {
+    private void setVariant(AphidColor color, AphidMarking marking) {
         this.setVariant(color.getIndex() & 255 | marking.getIndex() << 8 & '\uff00');
     }
 
-    public HorseColor getColor() {
-        return HorseColor.byIndex(this.getVariant() & 255);
+    public AphidColor getColor() {
+        return AphidColor.byIndex(this.getVariant() & 255);
     }
 
-    public HorseMarking getMarking() {
-        return HorseMarking.byIndex((this.getVariant() & '\uff00') >> 8);
-    }
-
-    protected void updateSaddle() {
-        if (!this.world.isClient) {
-            super.updateSaddle();
-            this.setArmorTypeFromStack(this.items.getStack(1));
-            this.setEquipmentDropChance(EquipmentSlot.CHEST, 0.0F);
-        }
-    }
-
-    private void setArmorTypeFromStack(ItemStack stack) {
-        this.equipArmor(stack);
-        if (!this.world.isClient) {
-            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).removeModifier(HORSE_ARMOR_BONUS_ID);
-            if (this.isHorseArmor(stack)) {
-                int i = ((HorseArmorItem) stack.getItem()).getBonus();
-                if (i != 0) {
-                    this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR).addTemporaryModifier(new EntityAttributeModifier(HORSE_ARMOR_BONUS_ID, "Horse armor bonus", (double) i, EntityAttributeModifier.Operation.ADDITION));
-                }
-            }
-        }
-
+    public AphidMarking getMarking() {
+        return AphidMarking.byIndex((this.getVariant() & '\uff00') >> 8);
     }
 
     protected void playWalkSound(BlockSoundGroup group) {
@@ -129,7 +89,6 @@ public class GreaterAphid extends BaseAphidEntity {
         if (this.random.nextInt(10) == 0) {
             this.playSound(ModSounds.BREATHE, group.getVolume() * 0.6F, group.getPitch());
         }
-
     }
 
     protected SoundEvent getAmbientSound() {
@@ -157,6 +116,7 @@ public class GreaterAphid extends BaseAphidEntity {
         return ModSounds.ANGRY;
     }
 
+    @Override
     public ActionResult interactMob(PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getStackInHand(hand);
         if (!this.isBaby()) {
@@ -189,38 +149,40 @@ public class GreaterAphid extends BaseAphidEntity {
         }
     }
 
+    @Override
     public boolean canBreedWith(AnimalEntity other) {
         if (other == this) {
             return false;
-        } else if (!(other instanceof DonkeyEntity) && !(other instanceof HorseEntity)) {
+        } else if (!(other instanceof DonkeyEntity) && !(other instanceof GreaterAphid)) {
             return false;
         } else {
             return this.canBreed() && ((BaseAphidEntity) other).canBreed();
         }
     }
 
+    @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         BaseAphidEntity BaseAphidEntity;
-        HorseEntity horseEntity = (HorseEntity) entity;
+        GreaterAphid horseEntity = (GreaterAphid) entity;
         BaseAphidEntity = ModEntityTypes.GREATER_APHID_ENTITY_TYPE.create(world);
         int i = this.random.nextInt(9);
-        HorseColor horseColor;
+        AphidColor horseColor;
         if (i < 4) {
             horseColor = this.getColor();
         } else if (i < 8) {
             horseColor = horseEntity.getColor();
         } else {
-            horseColor = Util.getRandom(HorseColor.values(), this.random);
+            horseColor = Util.getRandom(AphidColor.values(), this.random);
         }
 
         int j = this.random.nextInt(5);
-        HorseMarking horseMarking;
+        AphidMarking horseMarking;
         if (j < 2) {
             horseMarking = this.getMarking();
         } else if (j < 4) {
             horseMarking = horseEntity.getMarking();
         } else {
-            horseMarking = (HorseMarking) Util.getRandom(HorseMarking.values(), this.random);
+            horseMarking = Util.getRandom(AphidMarking.values(), this.random);
         }
 
         this.setVariant(horseColor, horseMarking);
@@ -229,36 +191,29 @@ public class GreaterAphid extends BaseAphidEntity {
         return BaseAphidEntity;
     }
 
-    public boolean hasArmorSlot() {
-        return true;
-    }
-
-    public boolean isHorseArmor(ItemStack item) {
-        return item.getItem() instanceof HorseArmorItem;
-    }
-
     @Nullable
+    @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        HorseColor horseColor;
-        if (entityData instanceof HorseEntity.HorseData) {
-            horseColor = ((HorseEntity.HorseData) entityData).color;
+        AphidColor horseColor;
+        if (entityData instanceof AphidData) {
+            horseColor = ((AphidData) entityData).color;
         } else {
-            horseColor = (HorseColor) Util.getRandom(HorseColor.values(), this.random);
-            entityData = new HorseEntity.HorseData(horseColor);
+            horseColor = Util.getRandom(AphidColor.values(), this.random);
+            entityData = new AphidData(horseColor);
         }
 
-        this.setVariant(horseColor, (HorseMarking) Util.getRandom(HorseMarking.values(), this.random));
-        return super.initialize(world, difficulty, spawnReason, (EntityData) entityData, entityNbt);
+        this.setVariant(horseColor, Util.getRandom(AphidMarking.values(), this.random));
+        return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
     }
 
     static {
-        VARIANT = DataTracker.registerData(HorseEntity.class, TrackedDataHandlerRegistry.INTEGER);
+        VARIANT = DataTracker.registerData(GreaterAphid.class, TrackedDataHandlerRegistry.INTEGER);
     }
 
-    public static class HorseData extends PassiveData {
-        public final HorseColor color;
+    public static class AphidData extends PassiveData {
+        public final AphidColor color;
 
-        public HorseData(HorseColor color) {
+        public AphidData(AphidColor color) {
             super(true);
             this.color = color;
         }
