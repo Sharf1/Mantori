@@ -170,29 +170,29 @@ public class GreaterAphid extends BaseAphidEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         BaseAphidEntity BaseAphidEntity;
-        GreaterAphid horseEntity = (GreaterAphid) entity;
+        GreaterAphid greaterAphid = (GreaterAphid) entity;
         BaseAphidEntity = ModEntityTypes.GREATER_APHID_ENTITY_TYPE.create(world);
         int i = this.random.nextInt(9);
-        AphidColor horseColor;
+        AphidColor aphidColor;
         if (i < 4) {
-            horseColor = this.getColor();
+            aphidColor = this.getColor();
         } else if (i < 8) {
-            horseColor = horseEntity.getColor();
+            aphidColor = greaterAphid.getColor();
         } else {
-            horseColor = Util.getRandom(AphidColor.values(), this.random);
+            aphidColor = Util.getRandom(AphidColor.values(), this.random);
         }
 
         int j = this.random.nextInt(5);
-        AphidMarking horseMarking;
+        AphidMarking aphidMarking;
         if (j < 2) {
-            horseMarking = this.getMarking();
+            aphidMarking = this.getMarking();
         } else if (j < 4) {
-            horseMarking = horseEntity.getMarking();
+            aphidMarking = greaterAphid.getMarking();
         } else {
-            horseMarking = Util.getRandom(AphidMarking.values(), this.random);
+            aphidMarking = Util.getRandom(AphidMarking.values(), this.random);
         }
 
-        this.setVariant(horseColor, horseMarking);
+        this.setVariant(aphidColor, aphidMarking);
 
         assert BaseAphidEntity != null;
         this.setChildAttributes(entity, BaseAphidEntity);
