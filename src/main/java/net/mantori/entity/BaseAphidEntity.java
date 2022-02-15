@@ -227,7 +227,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
     }
 
     protected int computeFallDamage(float fallDistance, float damageMultiplier) {
-        return MathHelper.ceil((fallDistance * 0.5F - 3.0F) * damageMultiplier);
+        return MathHelper.ceil((fallDistance * 0.2F - 6.0F) * damageMultiplier);
     }
 
     protected int getInventorySize() {
@@ -804,15 +804,15 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
     }
 
     protected float getChildHealthBonus() {
-        return 20.0F + (float)this.random.nextInt(10) + (float)this.random.nextInt(10);
+        return 20.0F + (float)this.random.nextInt(11) + (float)this.random.nextInt(9);
     }
 
     protected double getChildJumpStrengthBonus() {
-        return 0.4000000059604645D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D + this.random.nextDouble() * 0.2D;
+        return 1.5D + this.random.nextDouble() * 0.7D + this.random.nextDouble() * 0.4D + this.random.nextDouble() * 0.4D;
     }
 
     protected double getChildMovementSpeedBonus() {
-        return (0.44999998807907104D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
+        return (0.9D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D + this.random.nextDouble() * 0.3D) * 0.25D;
     }
 
     public boolean isClimbing() {
