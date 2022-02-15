@@ -170,12 +170,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         } else {
             this.tail.yaw = 0.0F;
         }
-        boolean bl2 = entity.isBaby();
-        this.right_hind_leg.visible = !bl2;
-        this.left_hind_leg.visible = !bl2;
-        this.right_front_leg.visible = !bl2;
-        this.left_front_leg.visible = !bl2;
-        this.body.pivotY = bl2 ? 10.8F : 0.0F;
     }
 
     @Override
