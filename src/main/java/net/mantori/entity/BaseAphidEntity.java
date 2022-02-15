@@ -747,6 +747,11 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         }
     }
 
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.ARTHROPOD;
+    }
+
     public boolean canJump() {
         return true;
     }
