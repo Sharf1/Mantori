@@ -102,7 +102,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
 
     protected void initCustomGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE), false));
+        this.goalSelector.add(3, new TemptGoal(this, 1.25D, Ingredient.ofItems(Items.CHORUS_FRUIT), false));
     }
 
     protected void initDataTracker() {
@@ -344,22 +344,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         float f = 0.0F;
         int i = 0;
         int j = 0;
-        if (item.isOf(Items.WHEAT)) {
-            f = 2.0F;
-            i = 20;
-            j = 3;
-        } else if (item.isOf(Items.SUGAR)) {
-            f = 1.0F;
-            i = 30;
-            j = 3;
-        } else if (item.isOf(Blocks.HAY_BLOCK.asItem())) {
-            f = 20.0F;
-            i = 180;
-        } else if (item.isOf(Items.APPLE)) {
-            f = 3.0F;
-            i = 60;
-            j = 3;
-        } else if (item.isOf(Items.GOLDEN_CARROT)) {
+        if (item.isOf(Items.CHORUS_FRUIT)) {
             f = 4.0F;
             i = 60;
             j = 5;
@@ -367,7 +352,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
                 bl = true;
                 this.lovePlayer(player);
             }
-        } else if (item.isOf(Items.GOLDEN_APPLE) || item.isOf(Items.ENCHANTED_GOLDEN_APPLE)) {
+        } else if (item.isOf(Items.CHORUS_FLOWER)) {
             f = 10.0F;
             i = 240;
             j = 10;
@@ -898,7 +883,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
 
     static {
         PARENT_APHID_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(16.0D).ignoreVisibility().setPredicate(IS_BRED_APHID);
-        BREEDING_INGREDIENT = Ingredient.ofItems(Items.WHEAT, Items.SUGAR, Blocks.HAY_BLOCK.asItem(), Items.APPLE, Items.GOLDEN_CARROT, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE);
+        BREEDING_INGREDIENT = Ingredient.ofItems(Items.CHORUS_FRUIT, Items.CHORUS_FLOWER);
         APHID_FLAGS = DataTracker.registerData(BaseAphidEntity.class, TrackedDataHandlerRegistry.BYTE);
         OWNER_UUID = DataTracker.registerData(BaseAphidEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }
