@@ -105,6 +105,7 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         this.head.pivotY = -14.0F;
         this.head.pivotZ = -14.0F;
 
+        this.tail.pivotY = -3F;
         this.tail.pivotZ = 24.0F;
         this.tail.pitch = -0.36F;
     }
@@ -148,7 +149,7 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         this.head.yaw = o * l * 0.017453292F + (1.0F - Math.max(o, n)) * this.head.yaw;
         this.head.pivotY = o * -4.0F + n * 11.0F + (1.0F - Math.max(o, n)) * this.head.pivotY;
         this.head.pivotZ = o * -4.0F + n * -12.0F + (1.0F - Math.max(o, n)) * this.head.pivotZ;
-        this.body.pitch = o * -0.7853982F + p * this.body.pitch;
+        this.body.pitch = o * -0.2853982F + p * this.body.pitch;
         float w = 0.2617994F * o;
         float x = MathHelper.cos(r * 0.6F + 3.1415927F);
         this.left_front_leg.pivotY = 2.0F * o + 14.0F * p;
