@@ -21,6 +21,6 @@ public class Mantori implements ModInitializer {
         ModItems.registerModItems();
         ModSounds.registerSounds();
         ModEntityTypes.registerModEntities();
-        BiomeModifications.addSpawn(BiomeSelectors.categories(Biome.Category.THEEND), SpawnGroup.CREATURE, ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 80, 2, 4);
+        BiomeModifications.addSpawn(BiomeSelectors.categories(Biome.Category.THEEND), SpawnGroup.CREATURE, ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 80, 1, 3);
     }
 }
