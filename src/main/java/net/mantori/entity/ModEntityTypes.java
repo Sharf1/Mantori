@@ -20,7 +20,7 @@ public class ModEntityTypes implements ModInitializer {
                     .spawnGroup(SpawnGroup.CREATURE)
                     .entityFactory(GreaterAphid::new)
                     .defaultAttributes(GreaterAphid::createBaseHorseAttributes)
-                    .dimensions(EntityDimensions.fixed(1.4F, 1.6F))
+                    .dimensions(EntityDimensions.fixed(2.0F, 3.0F))
                     .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GreaterAphid::canSpawn)
                     .build());
 
