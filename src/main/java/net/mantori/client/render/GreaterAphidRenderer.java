@@ -27,6 +27,7 @@ public class GreaterAphidRenderer extends BaseAphidRenderer<GreaterAphid, Greate
     }
 
     public Identifier getTexture(GreaterAphid greaterAphid) {
-        return (Identifier)TEXTURES.get(greaterAphid.getColor());
+        if (greaterAphid.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_child.png");
+        else return (Identifier)TEXTURES.get(greaterAphid.getColor());
     }
 }

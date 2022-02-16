@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum AphidMarking {
-    BASIC(0);
+    BASIC(0),
+    NONE(1);
 
     private static final AphidMarking[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(AphidMarking::getIndex)).toArray(AphidMarking[]::new);
     private final int index;
