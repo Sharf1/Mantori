@@ -22,9 +22,11 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
     private final ModelPart left_front_leg;
     private final ModelPart left_hind_leg;
     private final ModelPart right_hind_leg;
+    private final ModelPart wing;
 
     public GreaterAphidModel(ModelPart root) {
         this.body = root.getChild("body");
+        this.wing = root.getChild("wing");
         this.tail = root.getChild("tail");
         this.neck = root.getChild("neck");
         this.head = root.getChild("head");
@@ -41,7 +43,7 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         ModelPartData body = partdefinition.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-7.0F, -5.75F, -15.75F, 14.0F, 12.0F, 16.0F, new Dilation(0.0F))
                 .uv(0, 28).cuboid(-5.5F, -5.25F, 0.25F, 11.0F, 10.0F, 15.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -5.25F, 8.75F));
 
-        ModelPartData wing = body.addChild("wing", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 29.25F, -8.75F));
+        ModelPartData wing = partdefinition.addChild("wing", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 29.25F, -8.75F));
 
         ModelPartData cube_r1 = wing.addChild("cube_r1", ModelPartBuilder.create().uv(28, 28).cuboid(-4.0F, 0.0F, -1.0F, 5.0F, 0.0F, 9.0F, new Dilation(0.0F)), ModelTransform.of(-2.0F, -35.0F, -2.0F, 0.3491F, -0.6981F, 0.0524F));
 
@@ -170,6 +172,8 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         } else {
             this.tail.yaw = 0.0F;
         }
+        boolean bl2 = entity.isBaby();
+        this.wing.visible = !bl2;
     }
 
     @Override
