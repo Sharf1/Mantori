@@ -172,8 +172,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         } else {
             this.tail.yaw = 0.0F;
         }
-        boolean bl2 = entity.isBaby();
-        this.wing.visible = !bl2;
     }
 
     @Override
