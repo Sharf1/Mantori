@@ -29,11 +29,11 @@ public class GreaterAphidMarkingRenderer extends FeatureRenderer<GreaterAphid, G
         super(featureRendererContext);
     }
 
-    public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, GreaterAphid horseEntity, float f, float g, float h, float j, float k, float l) {
-        Identifier identifier = (Identifier)TEXTURES.get(horseEntity.getMarking());
-        if (identifier != null && !horseEntity.isInvisible()) {
+    public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, GreaterAphid greaterAphid, float f, float g, float h, float j, float k, float l) {
+        Identifier identifier = (Identifier)TEXTURES.get(greaterAphid.getMarking());
+        if (identifier != null && !greaterAphid.isInvisible()) {
             VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(RenderLayer.getEntityTranslucent(identifier));
-            this.getContextModel().render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(horseEntity, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+            this.getContextModel().render(matrixStack, vertexConsumer, i, LivingEntityRenderer.getOverlay(greaterAphid, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
         }
     }
 }
