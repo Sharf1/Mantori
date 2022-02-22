@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "mantori:block/beetleberry_stage0"
+    },
+    "age=1": {
+      "model": "mantori:block/beetleberry_stage1"
+    },
+    "age=2": {
+      "model": "mantori:block/beetleberry_stage2"
+    },
+    "age=3": {
+      "model": "mantori:block/beetleberry_stage3"
+    }
+  }
+}

@@ -2,6 +2,7 @@ package net.mantori.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.mantori.Mantori;
+import net.mantori.block.ModBlocks;
 import net.mantori.entity.ModEntityTypes;
 import net.mantori.item.custom.ModAxeItem;
 import net.mantori.item.custom.ModHoeItem;
@@ -25,6 +26,8 @@ public class ModItems {
             new HoneyBottleItem(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYDEW_BOTTLE)));
     public static final Item HONEYGLAZED_APHID_MEAT = registerItem("honeyglazed_aphid_meat",
             new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYGLAZED_APHID_MEAT)));
+    public static final Item BEETLEBERRY = registerItem("beetleberry",
+            new AliasedBlockItem(ModBlocks.BEETLEBERRY_BUSH, new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.BEETLEBERRY)));
 
     public static final Item CHITIN_SWORD = registerItem("chitin_sword",
             new SwordItem(ModToolMaterial.CHITIN, 4, -2.4f,

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.mantori.entity.ModEntityTypes;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
+import net.mantori.util.ModRenderHelper;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import org.slf4j.Logger;
@@ -21,6 +22,13 @@ public class Mantori implements ModInitializer {
         ModItems.registerModItems();
         ModSounds.registerSounds();
         ModEntityTypes.registerModEntities();
-        BiomeModifications.addSpawn(BiomeSelectors.categories(Biome.Category.THEEND), SpawnGroup.CREATURE, ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 80, 2, 4);
+        ModRenderHelper.setRenderLayers();
+        BiomeModifications.addSpawn(
+                BiomeSelectors.categories(Biome.Category.THEEND),
+                SpawnGroup.CREATURE,
+                ModEntityTypes.GREATER_APHID_ENTITY_TYPE,
+                80,
+                2,
+                4);
     }
 }
