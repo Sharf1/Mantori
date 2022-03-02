@@ -33,7 +33,7 @@ public class LesserAphidRenderer extends BaseLesserAphidRenderer<LesserAphid, Le
     }
 
     public Identifier getTexture(LesserAphid lesserAphid) {
-        if (lesserAphid.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/natural.png");
+        if (lesserAphid.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/lesser_child.png");
         else return (Identifier)TEXTURES.get(lesserAphid.getColor());
     }
 }
