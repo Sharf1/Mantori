@@ -4,16 +4,14 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum LesserAphidColor {
-    BASIC(0),
-    BLACK(1),
-    BLUEGREEN(2),
-    CYAN(3),
-    GRAY(4),
-    GREEN(5),
-    NATURAL(6),
-    ORANGE(7),
-    BROWN(8),
-    CHILD(9);
+    BLACK(0),
+    BLUEGREEN(1),
+    CYAN(2),
+    GRAY(3),
+    GREEN(4),
+    NATURAL(5),
+    ORANGE(6),
+    BROWN(7);
 
     private static final LesserAphidColor[] VALUES = Arrays.stream(values()).sorted(Comparator.comparingInt(LesserAphidColor::getIndex)).toArray(LesserAphidColor[]::new);
     private final int index;

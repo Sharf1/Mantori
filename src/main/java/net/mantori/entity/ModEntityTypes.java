@@ -32,7 +32,7 @@ public class ModEntityTypes implements ModInitializer {
                             .spawnGroup(SpawnGroup.CREATURE)
                             .entityFactory(LesserAphid::new)
                             .defaultAttributes(LesserAphid::createAttributes)
-                            .dimensions(EntityDimensions.fixed(2.0F, 3.0F))
+                            .dimensions(EntityDimensions.fixed(1.24F, 1.0F))
                             .spawnRestriction(SpawnRestriction.Location.NO_RESTRICTIONS, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LesserAphid::canSpawnIgnoreLightLevel)
                             .build());
 
