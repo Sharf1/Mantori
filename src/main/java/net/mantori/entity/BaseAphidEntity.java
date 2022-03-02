@@ -2,6 +2,7 @@ package net.mantori.entity;
 
 import com.google.common.collect.UnmodifiableIterator;
 import net.mantori.entity.goal.AphidBondWithPlayerGoal;
+import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
@@ -344,18 +345,10 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
         float f = 0.0F;
         int i = 0;
         int j = 0;
-        if (item.isOf(Items.CHORUS_FRUIT)) {
+        if (item.isOf(ModItems.BEETLEBERRY)) {
             f = 4.0F;
             i = 60;
             j = 5;
-            if (!this.world.isClient && this.isTame() && this.getBreedingAge() == 0 && !this.isInLove()) {
-                bl = true;
-                this.lovePlayer(player);
-            }
-        } else if (item.isOf(Items.CHORUS_FLOWER)) {
-            f = 10.0F;
-            i = 240;
-            j = 10;
             if (!this.world.isClient && this.isTame() && this.getBreedingAge() == 0 && !this.isInLove()) {
                 bl = true;
                 this.lovePlayer(player);
@@ -883,7 +876,7 @@ public abstract class BaseAphidEntity extends AnimalEntity implements JumpingMou
 
     static {
         PARENT_APHID_PREDICATE = TargetPredicate.createNonAttackable().setBaseMaxDistance(16.0D).ignoreVisibility().setPredicate(IS_BRED_APHID);
-        BREEDING_INGREDIENT = Ingredient.ofItems(Items.CHORUS_FRUIT, Items.CHORUS_FLOWER);
+        BREEDING_INGREDIENT = Ingredient.ofItems(ModItems.BEETLEBERRY);
         APHID_FLAGS = DataTracker.registerData(BaseAphidEntity.class, TrackedDataHandlerRegistry.BYTE);
         OWNER_UUID = DataTracker.registerData(BaseAphidEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
     }

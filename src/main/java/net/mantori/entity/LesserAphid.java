@@ -132,6 +132,11 @@ public class LesserAphid extends AnimalEntity {
         return this.isBaby() ? dimensions.height * 0.95F : 1.3F;
     }
 
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.ARTHROPOD;
+    }
+
     @Nullable
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
