@@ -16,7 +16,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
     // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
     private final ModelPart body;
     private final ModelPart tail;
-    private final ModelPart neck;
     private final ModelPart head;
     private final ModelPart right_front_leg;
     private final ModelPart left_front_leg;
@@ -28,7 +27,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         this.body = root.getChild("body");
         this.wing = root.getChild("wing");
         this.tail = root.getChild("tail");
-        this.neck = root.getChild("neck");
         this.head = root.getChild("head");
         this.right_front_leg = root.getChild("right_front_leg");
         this.left_front_leg = root.getChild("left_front_leg");
@@ -53,20 +51,21 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
                 .uv(73, 0).cuboid(-4.0F, -6.8479F, 13.7099F, 8.0F, 7.0F, 2.0F, new Dilation(0.0F))
                 .uv(50, 18).cuboid(-4.5F, -7.3479F, 3.7099F, 9.0F, 8.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -2.5F, 24.0F, -0.3491F, 0.0F, 0.0F));
 
-        ModelPartData neck = partdefinition.addChild("neck", ModelPartBuilder.create().uv(37, 38).cuboid(-4.5F, -10.1609F, -18.7291F, 9.0F, 8.0F, 15.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 4.5F, -3.5F, -0.7418F, 0.0F, 0.0F));
 
-        ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(44, 0).cuboid(-5.0F, -4.0F, -6.0F, 10.0F, 7.0F, 9.0F, new Dilation(0.0F))
-                .uv(78, 9).cuboid(-4.0F, -3.5F, -12.0F, 8.0F, 6.0F, 7.0F, new Dilation(0.0F))
-                .uv(52, 79).cuboid(0.0F, -16.5F, -10.0F, 0.0F, 13.0F, 9.0F, new Dilation(0.0F))
-                .uv(0, 9).cuboid(-4.0F, -17.5F, -10.0F, 8.0F, 7.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -6.0F, -11.0F));
+        ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(44, 0).cuboid(-5.0F, -14.5F, -16.5F, 10.0F, 7.0F, 9.0F, new Dilation(0.0F))
+                .uv(78, 9).cuboid(-4.0F, -14.0F, -22.5F, 8.0F, 6.0F, 7.0F, new Dilation(0.0F))
+                .uv(52, 79).cuboid(0.0F, -27.0F, -20.5F, 0.0F, 13.0F, 9.0F, new Dilation(0.0F))
+                .uv(0, 9).cuboid(-4.0F, -28F, -20.5F, 8.0F, 7.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 4.5F, -3.5F));
 
-        ModelPartData mandibulla = head.addChild("mandibulla", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, -1.5F, -6.0F));
+        ModelPartData neck = head.addChild("neck", ModelPartBuilder.create().uv(37, 38).cuboid(-4.5F, -5F, -15F, 9.0F, 8.0F, 15.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.7418F, 0.0F, 0.0F));
+
+        ModelPartData mandibulla = head.addChild("mandibulla", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, -12.0F, -13.5F));
 
         ModelPartData cube_r3 = mandibulla.addChild("cube_r3", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 2.0F, -3.0F, 0.22F, 0.1278F, 0.0285F));
 
         ModelPartData cube_r4 = mandibulla.addChild("cube_r4", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(8.0F, 2.0F, -3.0F, 0.22F, -0.1278F, -0.0285F));
 
-        ModelPartData antennae = head.addChild("antennae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 31.0F, 9.0F));
+        ModelPartData antennae = head.addChild("antennae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 18.5F, 2.5F));
 
         ModelPartData cube_r5 = antennae.addChild("cube_r5", ModelPartBuilder.create().uv(70, 83).cuboid(0.0F, -19.0F, -2.5F, 0.0F, 19.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, -30.5F, -16.0F, -0.6527F, -0.0531F, -0.0693F));
 
@@ -183,6 +182,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
 
     @Override
     protected Iterable<ModelPart> getBodyParts() {
-        return ImmutableList.of(body, tail, right_front_leg, right_hind_leg, left_front_leg, left_hind_leg, head, neck);
+        return ImmutableList.of(body, tail, right_front_leg, right_hind_leg, left_front_leg, left_hind_leg, head);
     }
 }
