@@ -49,46 +49,46 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
 
         ModelPartData cube_r2 = wing.addChild("cube_r2", ModelPartBuilder.create().uv(28, 28).cuboid(-1.0F, 0.0F, -1.0F, 5.0F, 0.0F, 9.0F, new Dilation(0.0F)), ModelTransform.of(2.0F, -35.0F, -2.0F, 0.3491F, 0.6981F, -0.0524F));
 
-        ModelPartData tail = partdefinition.addChild("tail", ModelPartBuilder.create().uv(66, 36).cuboid(-4.0F, -3.8479F, -2.2901F, 8.0F, 7.0F, 6.0F, new Dilation(0.0F))
-                .uv(52, 87).cuboid(-4.0F, -3.8479F, 13.7099F, 8.0F, 7.0F, 2.0F, new Dilation(0.0F))
-                .uv(50, 18).cuboid(-4.5F, -4.3479F, 3.7099F, 9.0F, 8.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -2.5F, 24.0F, -0.3491F, 0.0F, 0.0F));
+        ModelPartData tail = partdefinition.addChild("tail", ModelPartBuilder.create().uv(24, 82).cuboid(-4.0F, -6.8479F, -2.2901F, 8.0F, 7.0F, 6.0F, new Dilation(0.0F))
+                .uv(73, 0).cuboid(-4.0F, -6.8479F, 13.7099F, 8.0F, 7.0F, 2.0F, new Dilation(0.0F))
+                .uv(50, 18).cuboid(-4.5F, -7.3479F, 3.7099F, 9.0F, 8.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -2.5F, 24.0F, -0.3491F, 0.0F, 0.0F));
 
-        ModelPartData neck = partdefinition.addChild("neck", ModelPartBuilder.create().uv(38, 39).cuboid(-3.5F, -10.1609F, -18.7291F, 7.0F, 7.0F, 14.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 4.5F, -3.5F, -0.7418F, 0.0F, 0.0F));
+        ModelPartData neck = partdefinition.addChild("neck", ModelPartBuilder.create().uv(37, 38).cuboid(-4.5F, -10.1609F, -18.7291F, 9.0F, 8.0F, 15.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 4.5F, -3.5F, -0.7418F, 0.0F, 0.0F));
 
-        ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(44, 0).cuboid(-4.0F, -4.0F, -6.0F, 8.0F, 6.0F, 8.0F, new Dilation(0.0F))
-                .uv(80, 49).cuboid(-3.0F, -3.5F, -12.0F, 6.0F, 5.0F, 6.0F, new Dilation(0.0F))
-                .uv(24, 72).cuboid(0.0F, -16.5F, -11.0F, 0.0F, 13.0F, 9.0F, new Dilation(0.0F))
-                .uv(0, 9).cuboid(-4.0F, -17.5F, -11.0F, 8.0F, 7.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -12.0F, -12.0F));
+        ModelPartData head = partdefinition.addChild("head", ModelPartBuilder.create().uv(44, 0).cuboid(-5.0F, -4.0F, -6.0F, 10.0F, 7.0F, 9.0F, new Dilation(0.0F))
+                .uv(78, 9).cuboid(-4.0F, -3.5F, -12.0F, 8.0F, 6.0F, 7.0F, new Dilation(0.0F))
+                .uv(52, 79).cuboid(0.0F, -16.5F, -10.0F, 0.0F, 13.0F, 9.0F, new Dilation(0.0F))
+                .uv(0, 9).cuboid(-4.0F, -17.5F, -10.0F, 8.0F, 7.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -6.0F, -11.0F));
 
-        ModelPartData mandibulla = head.addChild("mandibulla", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, 5.5F, -4.0F));
+        ModelPartData mandibulla = head.addChild("mandibulla", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, -1.5F, -6.0F));
 
-        ModelPartData cube_r3 = mandibulla.addChild("cube_r3", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(1.0F, -5.0F, -3.0F, 0.22F, 0.1278F, 0.0285F));
+        ModelPartData cube_r3 = mandibulla.addChild("cube_r3", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 2.0F, -3.0F, 0.22F, 0.1278F, 0.0285F));
 
-        ModelPartData cube_r4 = mandibulla.addChild("cube_r4", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(7.0F, -5.0F, -3.0F, 0.22F, -0.1278F, -0.0285F));
+        ModelPartData cube_r4 = mandibulla.addChild("cube_r4", ModelPartBuilder.create().uv(0, 24).cuboid(0.0F, -2.0F, -4.0F, 0.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(8.0F, 2.0F, -3.0F, 0.22F, -0.1278F, -0.0285F));
 
-        ModelPartData antennae = head.addChild("antennae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 36.0F, 12.0F));
+        ModelPartData antennae = head.addChild("antennae", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 31.0F, 9.0F));
 
-        ModelPartData cube_r5 = antennae.addChild("cube_r5", ModelPartBuilder.create().uv(42, 76).cuboid(0.0F, -19.0F, -2.5F, 0.0F, 19.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(-4.0F, -37.5F, -16.0F, -0.6527F, -0.0531F, -0.0693F));
+        ModelPartData cube_r5 = antennae.addChild("cube_r5", ModelPartBuilder.create().uv(70, 83).cuboid(0.0F, -19.0F, -2.5F, 0.0F, 19.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, -30.5F, -16.0F, -0.6527F, -0.0531F, -0.0693F));
 
-        ModelPartData cube_r6 = antennae.addChild("cube_r6", ModelPartBuilder.create().uv(42, 76).cuboid(0.0F, -19.0F, -2.5F, 0.0F, 19.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(4.0F, -37.5F, -16.0F, -0.6527F, 0.0531F, 0.0693F));
+        ModelPartData cube_r6 = antennae.addChild("cube_r6", ModelPartBuilder.create().uv(70, 83).cuboid(0.0F, -19.0F, -2.5F, 0.0F, 19.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(5.0F, -30.5F, -16.0F, -0.6527F, 0.0531F, 0.0693F));
 
-        ModelPartData left_front_leg = partdefinition.addChild("left_front_leg", ModelPartBuilder.create().uv(34, 60).cuboid(-3.5F, -7.0F, -4.5F, 7.0F, 12.0F, 9.0F, new Dilation(0.0F))
-                .uv(66, 60).cuboid(-2.5F, 5.0F, -3.5F, 5.0F, 20.0F, 7.0F, new Dilation(0.0F))
+        ModelPartData left_front_leg = partdefinition.addChild("left_front_leg", ModelPartBuilder.create().uv(34, 61).cuboid(-3.5F, -7.0F, -4.5F, 7.0F, 12.0F, 9.0F, new Dilation(0.0F))
+                .uv(66, 61).cuboid(-2.5F, 5.0F, -3.5F, 5.0F, 20.0F, 7.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-2.5F, 19.0F, 3.5F, 5.0F, 6.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(6.5F, -1.0F, 0.5F));
 
-        ModelPartData right_front_leg = partdefinition.addChild("right_front_leg", ModelPartBuilder.create().uv(34, 60).cuboid(-3.5F, -7.0F, -4.5F, 7.0F, 12.0F, 9.0F, new Dilation(0.0F))
-                .uv(66, 60).cuboid(-2.5F, 5.0F, -3.5F, 5.0F, 20.0F, 7.0F, new Dilation(0.0F))
+        ModelPartData right_front_leg = partdefinition.addChild("right_front_leg", ModelPartBuilder.create().uv(34, 61).cuboid(-3.5F, -7.0F, -4.5F, 7.0F, 12.0F, 9.0F, new Dilation(0.0F))
+                .uv(66, 61).cuboid(-2.5F, 5.0F, -3.5F, 5.0F, 20.0F, 7.0F, new Dilation(0.0F))
                 .uv(0, 0).cuboid(-2.5F, 19.0F, 3.5F, 5.0F, 6.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(-6.5F, -1.0F, 0.5F));
 
         ModelPartData left_hind_leg = partdefinition.addChild("left_hind_leg", ModelPartBuilder.create().uv(0, 53).cuboid(-3.5F, -7.0F, -5.0F, 7.0F, 12.0F, 10.0F, new Dilation(0.0F))
                 .uv(0, 75).cuboid(-2.5F, 7.5F, 3.5F, 5.0F, 17.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, -0.5F, 18.0F));
 
-        ModelPartData cube_r7 = left_hind_leg.addChild("cube_r7", ModelPartBuilder.create().uv(78, 0).cuboid(-2.5F, 0.0F, -4.0F, 5.0F, 13.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -0.5F, 0.6981F, 0.0F, 0.0F));
+        ModelPartData cube_r7 = left_hind_leg.addChild("cube_r7", ModelPartBuilder.create().uv(80, 28).cuboid(-2.5F, 0.0F, -4.0F, 5.0F, 13.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -0.5F, 0.6981F, 0.0F, 0.0F));
 
         ModelPartData right_hind_leg = partdefinition.addChild("right_hind_leg", ModelPartBuilder.create().uv(0, 53).cuboid(-3.5F, -7.0F, -5.0F, 7.0F, 12.0F, 10.0F, new Dilation(0.0F))
                 .uv(0, 75).cuboid(-2.5F, 7.5F, 3.5F, 5.0F, 17.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(-4.0F, -0.5F, 18.0F));
 
-        ModelPartData cube_r8 = right_hind_leg.addChild("cube_r8", ModelPartBuilder.create().uv(78, 0).cuboid(-2.5F, 0.0F, -4.0F, 5.0F, 13.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -0.5F, 0.6981F, 0.0F, 0.0F));
+        ModelPartData cube_r8 = right_hind_leg.addChild("cube_r8", ModelPartBuilder.create().uv(80, 28).cuboid(-2.5F, 0.0F, -4.0F, 5.0F, 13.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -0.5F, 0.6981F, 0.0F, 0.0F));
         return TexturedModelData.of(meshdefinition, 128, 128);
     }
 
@@ -172,6 +172,8 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         } else {
             this.tail.yaw = 0.0F;
         }
+        boolean bl2 = entity.isBaby();
+        this.wing.visible = !bl2;
     }
 
     @Override
