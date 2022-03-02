@@ -61,6 +61,9 @@ public class ModItems {
     public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntityTypes.GREATER_APHID_ENTITY_TYPE, 11705790, 10841541,
             new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
+    public static final Item LESSER_APHID_SPAWN_EGG = registerItem("lesser_aphid_spawn_egg", new SpawnEggItem(ModEntityTypes.LESSER_APHID_ENTITY_TYPE, 11705790, 10841541,
+            new FabricItemSettings().group(ModItemGroup.MANTORI)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(Mantori.MOD_ID, name), item);
     }

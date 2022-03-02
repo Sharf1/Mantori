@@ -7,18 +7,19 @@ import net.mantori.Mantori;
 import net.mantori.client.ModModelLayers;
 import net.mantori.client.model.GreaterAphidModel;
 import net.mantori.client.render.layer.GreaterAphidMarkingRenderer;
-import net.mantori.entity.AphidColor;
+import net.mantori.entity.GreaterAphidColor;
 import net.mantori.entity.GreaterAphid;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class GreaterAphidRenderer extends BaseAphidRenderer<GreaterAphid, GreaterAphidModel<GreaterAphid>> {
-    private static final Map TEXTURES = Util.make(Maps.newEnumMap(AphidColor.class), (enumMap) -> {
-        enumMap.put(AphidColor.BASIC, new Identifier(Mantori.MOD_ID, "textures/entity/greater_0.png"));
+    private static final Map<GreaterAphidColor, @Nullable Object> TEXTURES = Util.make(Maps.newEnumMap(GreaterAphidColor.class), (enumMap) -> {
+        enumMap.put(GreaterAphidColor.BASIC, new Identifier(Mantori.MOD_ID, "textures/entity/greater_0.png"));
     });
 
     public GreaterAphidRenderer(EntityRendererFactory.Context context) {

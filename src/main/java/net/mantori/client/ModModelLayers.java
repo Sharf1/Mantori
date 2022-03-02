@@ -18,6 +18,7 @@ public class ModModelLayers {
     private static final Set<EntityModelLayer> LAYERS = Sets.newHashSet();
 
     public static final EntityModelLayer GREATER_APHID = registerMain("greater_aphid");
+    public static final EntityModelLayer LESSER_APHID = registerMain("lesser_aphid");
 
     public ModModelLayers() {
     }

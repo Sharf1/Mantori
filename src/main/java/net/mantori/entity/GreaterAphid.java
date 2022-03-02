@@ -1,13 +1,9 @@
 package net.mantori.entity;
 
-import net.fabricmc.fabric.api.biome.v1.TheEndBiomes;
 import net.mantori.sounds.ModSounds;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -15,27 +11,19 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HorseArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class GreaterAphid extends BaseAphidEntity {
     private static final TrackedData<Integer> VARIANT;
@@ -52,6 +40,10 @@ public class GreaterAphid extends BaseAphidEntity {
 
     public static boolean canSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
         return !world.getBiome(pos).toString().matches("minecraft:the_end");
+    }
+
+    public static boolean canSpawnIgnoreLightLevel(EntityType<? extends BaseAphidEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return canMobSpawn(type, world, spawnReason, pos, random);
     }
 
     protected void initDataTracker() {
@@ -77,12 +69,12 @@ public class GreaterAphid extends BaseAphidEntity {
         return this.dataTracker.get(VARIANT);
     }
 
-    private void setVariant(AphidColor color, AphidMarking marking) {
+    private void setVariant(GreaterAphidColor color, AphidMarking marking) {
         this.setVariant(color.getIndex() & 255 | marking.getIndex() << 8 & '\uff00');
     }
 
-    public AphidColor getColor() {
-        return AphidColor.byIndex(this.getVariant() & 255);
+    public GreaterAphidColor getColor() {
+        return GreaterAphidColor.byIndex(this.getVariant() & 255);
     }
 
     public AphidMarking getMarking() {
@@ -173,13 +165,13 @@ public class GreaterAphid extends BaseAphidEntity {
         GreaterAphid greaterAphid = (GreaterAphid) entity;
         BaseAphidEntity = ModEntityTypes.GREATER_APHID_ENTITY_TYPE.create(world);
         int i = this.random.nextInt(9);
-        AphidColor aphidColor;
+        GreaterAphidColor aphidColor;
         if (i < 4) {
             aphidColor = this.getColor();
         } else if (i < 8) {
             aphidColor = greaterAphid.getColor();
         } else {
-            aphidColor = Util.getRandom(AphidColor.values(), this.random);
+            aphidColor = Util.getRandom(GreaterAphidColor.values(), this.random);
         }
 
         int j = this.random.nextInt(5);
@@ -202,11 +194,11 @@ public class GreaterAphid extends BaseAphidEntity {
     @Nullable
     @Override
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityNbt) {
-        AphidColor aphidColor;
+        GreaterAphidColor aphidColor;
         if (entityData instanceof AphidData) {
             aphidColor = ((AphidData) entityData).color;
         } else {
-            aphidColor = Util.getRandom(AphidColor.values(), this.random);
+            aphidColor = Util.getRandom(GreaterAphidColor.values(), this.random);
             entityData = new AphidData(aphidColor);
         }
 
@@ -219,9 +211,9 @@ public class GreaterAphid extends BaseAphidEntity {
     }
 
     public static class AphidData extends PassiveData {
-        public final AphidColor color;
+        public final GreaterAphidColor color;
 
-        public AphidData(AphidColor color) {
+        public AphidData(GreaterAphidColor color) {
             super(true);
             this.color = color;
         }
