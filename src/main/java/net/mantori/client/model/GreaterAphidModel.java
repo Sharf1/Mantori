@@ -43,7 +43,7 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
 
         ModelPartData wing = partdefinition.addChild("wing", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 29.25F, -8.75F));
 
-        ModelPartData cube_r1 = wing.addChild("cube_r1", ModelPartBuilder.create().uv(28, 28).cuboid(-4.0F, 0.0F, -1.0F, 5.0F, 0.0F, 9.0F, new Dilation(0.0F)), ModelTransform.of(-2.0F, -35.0F, -2.0F, 0.3491F, -0.6981F, 0.0524F));
+        ModelPartData cube_r1 = wing.addChild("cube_r1", ModelPartBuilder.create().uv(84, 0).cuboid(-4.0F, 0.0F, -1.0F, 5.0F, 0.0F, 9.0F, new Dilation(0.0F)), ModelTransform.of(-2.0F, -35.0F, -2.0F, 0.3491F, -0.6981F, 0.0524F));
 
         ModelPartData cube_r2 = wing.addChild("cube_r2", ModelPartBuilder.create().uv(28, 28).cuboid(-1.0F, 0.0F, -1.0F, 5.0F, 0.0F, 9.0F, new Dilation(0.0F)), ModelTransform.of(2.0F, -35.0F, -2.0F, 0.3491F, 0.6981F, -0.0524F));
 
@@ -171,8 +171,6 @@ public class GreaterAphidModel<T extends BaseAphidEntity> extends AnimalModel<T>
         } else {
             this.tail.yaw = 0.0F;
         }
-        boolean bl2 = entity.isBaby();
-        this.wing.visible = !bl2;
     }
 
     @Override
