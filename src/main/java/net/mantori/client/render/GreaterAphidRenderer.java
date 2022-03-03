@@ -20,6 +20,12 @@ import java.util.Map;
 public class GreaterAphidRenderer extends BaseAphidRenderer<GreaterAphid, GreaterAphidModel<GreaterAphid>> {
     private static final Map<GreaterAphidColor, @Nullable Object> TEXTURES = Util.make(Maps.newEnumMap(GreaterAphidColor.class), (enumMap) -> {
         enumMap.put(GreaterAphidColor.GREATER_NATURAL, new Identifier(Mantori.MOD_ID, "textures/entity/greater_natural.png"));
+        enumMap.put(GreaterAphidColor.GREATER_BLUE, new Identifier(Mantori.MOD_ID, "textures/entity/greater_blue.png"));
+        enumMap.put(GreaterAphidColor.GREATER_GREEN, new Identifier(Mantori.MOD_ID, "textures/entity/greater_green.png"));
+        enumMap.put(GreaterAphidColor.GREATER_ORANGE, new Identifier(Mantori.MOD_ID, "textures/entity/greater_orange.png"));
+        enumMap.put(GreaterAphidColor.GREATER_PEACH, new Identifier(Mantori.MOD_ID, "textures/entity/greater_peach.png"));
+        enumMap.put(GreaterAphidColor.GREATER_RED, new Identifier(Mantori.MOD_ID, "textures/entity/greater_red.png"));
+        enumMap.put(GreaterAphidColor.GREATER_YELLOW, new Identifier(Mantori.MOD_ID, "textures/entity/greater_yellow.png"));
     });
 
     public GreaterAphidRenderer(EntityRendererFactory.Context context) {
