@@ -36,6 +36,8 @@
   "mantori.footstep": "Footsteps",
   "mantori.footstep.wood": "Footsteps",
 
+  "entity.mantori.greater_aphid": "Greater Aphid",
+  "entity.mantori.lesser_aphid": "Lesser Aphid",
 
   "itemGroup.mantori.mantori": "Aphid Additions"
 }
