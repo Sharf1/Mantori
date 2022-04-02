@@ -12,6 +12,8 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import static net.minecraft.item.Items.GLASS_BOTTLE;
+
 public class ModItems {
     public static final Item CHITIN_SHELL = registerItem("chitin",
             new Item(new FabricItemSettings().group(ModItemGroup.MANTORI)));
@@ -23,7 +25,7 @@ public class ModItems {
     public static final Item COOKED_APHID_MEAT = registerItem("cooked_aphid_meat",
             new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.COOKED_APHID_MEAT)));
     public static final Item HONEYDEW_BOTTLE = registerItem("honeydew_bottle",
-            new HoneyBottleItem(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYDEW_BOTTLE)));
+            new HoneyBottleItem(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYDEW_BOTTLE).recipeRemainder(GLASS_BOTTLE)));
     public static final Item HONEYGLAZED_APHID_MEAT = registerItem("honeyglazed_aphid_meat",
             new Item(new FabricItemSettings().group(ModItemGroup.MANTORI).food(ModFoodComponents.HONEYGLAZED_APHID_MEAT)));
     public static final Item BEETLEBERRY = registerItem("beetleberry",
