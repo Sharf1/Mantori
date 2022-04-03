@@ -7,6 +7,8 @@ import net.mantori.entity.ModEntityTypes;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
 import net.mantori.util.ModRenderHelper;
+import net.mantori.world.feature.ModConfiguredFeatures;
+import net.mantori.world.gen.ModWorldGen;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import org.slf4j.Logger;
@@ -19,6 +21,8 @@ public class Mantori implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ModConfiguredFeatures.registerConfiguredFeatures();
+
         ModItems.registerModItems();
         ModSounds.registerSounds();
         ModEntityTypes.registerModEntities();
@@ -37,5 +41,6 @@ public class Mantori implements ModInitializer {
                 90,
                 4,
                 6);
+        ModWorldGen.generateModWorldGen();
     }
 }
