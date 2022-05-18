@@ -41,7 +41,7 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getType() == ModEntities.LESSER_APHID) {
+        if (!(entity instanceof LivingEntity) || entity.getType() == ModEntities.LESSER_APHID || entity.getType() == ModEntities.GREATER_APHID) {
             return;
         }
         entity.slowMovement(state, new Vec3d(0.8f, 0.75, 0.8f));
