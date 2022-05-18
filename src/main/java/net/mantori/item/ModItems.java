@@ -60,7 +60,7 @@ public class ModItems {
             new ArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.FEET,
                     new FabricItemSettings().group((ModItemGroup.MANTORI))));
 
-    public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntities.LESSER_APHID, 3947078, 6900102,
+    public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntities.GREATER_APHID, 3947078, 6900102,
             new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
     public static final Item LESSER_APHID_SPAWN_EGG = registerItem("lesser_aphid_spawn_egg", new SpawnEggItem(ModEntities.LESSER_APHID, 7690372, 6377329,

@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "MantoriMixin"
+    "MantoriMixin",
+    "HorseBaseEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

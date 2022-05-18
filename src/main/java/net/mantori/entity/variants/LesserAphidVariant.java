@@ -17,7 +17,7 @@ public enum LesserAphidVariant {
     GRAY(7, "gray", false);
 
     public static final LesserAphidVariant[] VARIANTS = Arrays.stream(LesserAphidVariant.values()).sorted(Comparator.comparingInt(LesserAphidVariant::getId)).toArray(LesserAphidVariant[]::new);
-    ;
+
     private final int id;
 
     private final String name;

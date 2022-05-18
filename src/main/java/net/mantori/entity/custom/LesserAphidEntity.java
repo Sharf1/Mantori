@@ -4,9 +4,7 @@ import net.mantori.entity.ModEntities;
 import net.mantori.entity.variants.LesserAphidVariant;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -17,7 +15,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -28,10 +25,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
@@ -190,8 +185,12 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         return !this.onGround;
     }
 
+    public static boolean canSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return !world.getBiome(pos).toString().matches("minecraft:the_end");
+    }
+
     public static boolean canSpawnIgnoreLightLevel(EntityType<? extends LesserAphidEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return canMobSpawn(type, world, spawnReason, pos, random);
+        return canMobSpawn(type, world, spawnReason, pos, random) && canSpawn(type, world, spawnReason, pos, random);
     }
 
     /* VARIANTS */
