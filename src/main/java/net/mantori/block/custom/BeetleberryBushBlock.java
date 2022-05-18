@@ -1,11 +1,8 @@
 package net.mantori.block.custom;
 
-import net.mantori.entity.ModEntityTypes;
+import net.mantori.entity.ModEntities;
 import net.mantori.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SweetBerryBushBlock;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,11 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
@@ -25,6 +25,10 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
     public BeetleberryBushBlock(Settings settings) {
         super(settings);
     }
+    public static final IntProperty AGE = Properties.AGE_3;
+    private static final VoxelShape SMALL_SHAPE = Block.createCuboidShape(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
+    private static final VoxelShape LARGE_SHAPE = Block.createCuboidShape(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
+
 
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
@@ -37,7 +41,7 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
 
     @Override
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getType() == ModEntityTypes.GREATER_APHID_ENTITY_TYPE) {
+        if (!(entity instanceof LivingEntity) || entity.getType() == ModEntities.LESSER_APHID) {
             return;
         }
         entity.slowMovement(state, new Vec3d(0.8f, 0.75, 0.8f));
@@ -60,4 +64,14 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
         }
         return super.onUse(state, world, pos, player, hand, hit);
     }
+
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        if (state.get(AGE) == 0) {
+            return SMALL_SHAPE;
+        }
+        if (state.get(AGE) < 3) {
+            return LARGE_SHAPE;
+        }
+        return super.getOutlineShape(state, world, pos, context);}
 }
