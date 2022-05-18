@@ -492,7 +492,7 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.greater.jump", true));
         } else if (event.isMoving()) {
             Vec3d vec3d = greaterAphidEntity.getVelocity().normalize();
-            if (vec3d.x > 0.75f || vec3d.x < -0.75f || vec3d.z > 0.75f || vec3d.z < -0.75f)
+            if (vec3d.x > 0.8f || vec3d.x < -0.8f || vec3d.z > 0.8f || vec3d.z < -0.8f)
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.greater.gallop", true));
             else
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.greater.walk", true));
