@@ -7,6 +7,7 @@ import net.mantori.sounds.ModSounds;
 import net.mantori.util.ModRegistries;
 import net.mantori.world.feature.ModConfiguredFeatures;
 import net.mantori.world.gen.ModWorldGen;
+import net.mantori.world.structures.ModStructures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,5 +27,6 @@ public class Mantori implements ModInitializer {
         ModRegistries.registerModStuff();
 
         ModWorldGen.generateModWorldGen();
+        ModStructures.registerStructureFeatures();
     }
 }
