@@ -3,9 +3,8 @@
 
   "_comment": " This biome tag can specify the biome directly. Or specify another biome tag by starting with # ",
   "values": [
-    "#minecraft:is_mountain",
-    "#minecraft:is_ocean",
-    "#minecraft:is_deep_ocean",
-    "minecraft:swamp"
+    "minecraft:end_barrens",
+    "minecraft:end_midlands",
+    "minecraft:end_highlands"
   ]
 }
