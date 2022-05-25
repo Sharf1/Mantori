@@ -95,5 +95,11 @@
       "mantori:wood5",
       "mantori:wood6"
     ]
+  },
+  "goose.honk": {
+    "subtitle": "mantori.honk",
+    "sounds": [
+      "mantori:honk"
+    ]
   }
 }

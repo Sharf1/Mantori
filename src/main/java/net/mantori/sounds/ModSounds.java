@@ -9,6 +9,7 @@ public class ModSounds {
     public static SoundEvent WING_FLAP = registerSoundEvent("aphid.wing_flap");
     public static SoundEvent AMBIENT = registerSoundEvent("aphid.ambient");
     public static SoundEvent ANGRY = registerSoundEvent("aphid.angry");
+    public static SoundEvent HONK = registerSoundEvent("goose.honk");
     public static SoundEvent BREATHE = registerSoundEvent("aphid.breathe");
     public static SoundEvent DEATH = registerSoundEvent("aphid.death");
     public static SoundEvent EAT = registerSoundEvent("aphid.eat");
