@@ -4,7 +4,10 @@
   "values": [
     "minecraft:end_midlands",
     "minecraft:end_highlands",
-    "betterend:painted_mountains",
-    "betterend:dust_wastelands"
+    { "id": "betterend:painted_mountains",
+      "required": false },
+    { "id": "betterend:dust_wastelands",
+      "required": false }
+
   ]
 }
