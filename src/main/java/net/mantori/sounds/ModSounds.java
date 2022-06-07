@@ -8,6 +8,7 @@ import net.minecraft.util.registry.Registry;
 public class ModSounds {
     public static SoundEvent WING_FLAP = registerSoundEvent("aphid.wing_flap");
     public static SoundEvent AMBIENT = registerSoundEvent("aphid.ambient");
+    public static SoundEvent LESSER_AMBIENT = registerSoundEvent("aphid.lesser.ambient");
     public static SoundEvent ANGRY = registerSoundEvent("aphid.angry");
     public static SoundEvent HONK = registerSoundEvent("goose.honk");
     public static SoundEvent BREATHE = registerSoundEvent("aphid.breathe");
@@ -26,6 +27,6 @@ public class ModSounds {
     };
 
     public static void registerSounds() {
-        System.out.println("Registering ModSounds for" + Mantori.MOD_ID);
+        System.out.println("Registering ModSounds for " + Mantori.MOD_ID);
     }
 }

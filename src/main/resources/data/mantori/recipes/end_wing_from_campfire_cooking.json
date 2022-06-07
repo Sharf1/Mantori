@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "mantori:elytra_shard"
+  },
+  "result": "mantori:end_wing",
+  "experience": 0.35,
+  "cookingtime": 600
+}

@@ -15,6 +15,17 @@
       "mantori:ambient3"
     ]
   },
+  "aphid.lesser.ambient": {
+    "subtitle": "mantori.ambient",
+    "sounds": [
+      "mantori:ambient1",
+      "mantori:ambient2",
+      "mantori:ambient3",
+      "mantori:wing_flap1",
+      {"name": "mantori:wing_flap2",
+        "volume": 0.8}
+    ]
+  },
   "aphid.angry": {
     "subtitle": "mantori.angry",
     "sounds": [

@@ -10,7 +10,7 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterial implements ArmorMaterial {
-   CHITIN("chitin", 30, new int[]{3, 5, 7, 3}, 20, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, 0.0f, () -> Ingredient.ofItems(ModItems.CHITIN_SHELL)),;
+   CHITIN("chitin", 15, new int[]{3, 5, 7, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, -0.1f, () -> Ingredient.ofItems(ModItems.CHITIN_SHELL)),;
 
     private static final int[] BASE_DURABILITY;
     private final String name;

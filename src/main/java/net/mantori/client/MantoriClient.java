@@ -17,6 +17,8 @@ public class MantoriClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.BEETLEBERRY_BUSH, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.DRAGONS_BREATH_BUSH, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.END_GRASS, RenderLayer.getCutout());
 
         EntityRendererRegistry.register(ModEntities.LESSER_APHID, LesserAphidRenderer::new);
         EntityRendererRegistry.register(ModEntities.GREATER_APHID, GreaterAphidRenderer::new);

@@ -42,7 +42,7 @@ public class LesserAphidRenderer extends GeoEntityRenderer<LesserAphidEntity> {
     }
 
     @Override
-    public Identifier getTextureLocation(LesserAphidEntity entity) {
+    public Identifier getTexture(LesserAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/lesser_aphid/lesser_child.png");
         else return LOCATION_BY_VARIANT.get(entity.getVariant());
     }

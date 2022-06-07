@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "mantori:block/jelly_side",
+        "bottom": "mantori:block/jelly_bottom",
+        "top": "mantori:block/jelly_top",
+        "side": "mantori:block/jelly_side",
+        "inside": "mantori:block/jelly_inner"
+    },
+    "elements": [
+        {   "from": [ 9, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

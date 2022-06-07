@@ -28,6 +28,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -37,8 +38,6 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
-
-import java.util.Random;
 
 
 public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
@@ -131,7 +130,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
 
 
     @Override
-    protected SoundEvent getAmbientSound() {return ModSounds.AMBIENT; }
+    protected SoundEvent getAmbientSound() {return ModSounds.LESSER_AMBIENT;}
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return ModSounds.HURT;
@@ -154,7 +153,6 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
 
     @Override
     protected void addFlapEffects() {
-        this.playSound(ModSounds.WING_FLAP, 0.15f, 1.0f);
         this.field_28640 = this.speed + this.maxWingDeviation / 2.0f;
     }
 

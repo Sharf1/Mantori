@@ -4,7 +4,13 @@
   "item.mantori.aphid_meat": "Raw Aphid Meat",
   "item.mantori.cooked_aphid_meat": "Cooked Aphid Meat",
   "item.mantori.honeyglazed_aphid_meat": "Honeyglazed Aphid Meat",
+  "item.mantori.elytra_shard": "Elytra Shard",
+  "item.mantori.end_wing": "End Wing",
+  "item.mantori.glazed_wing": "Glazed Wing",
+  "item.mantori.hot_wing": "Hot Wing",
   "item.mantori.honeydew_bottle": "Honeydew Bottle",
+  "item.mantori.beetleberry_jam": "Beetleberry Jam",
+  "item.mantori.hot_sauce": "Hot Sauce",
   "item.mantori.greater_aphid_spawn_egg": "Greater Aphid Spawn Egg",
   "item.mantori.lesser_aphid_spawn_egg": "Lesser Aphid Spawn Egg",
 
@@ -20,7 +26,14 @@
   "item.mantori.chitin_boots": "Chitin Boots",
 
   "block.mantori.beetleberry_bush": "Beetleberry Bush",
+  "block.mantori.dragons_breath_bush": "Dragon's Breath Bush",
+  "block.mantori.end_grass": "End Grass",
+  "item.mantori.end_grass": "End Grass",
+  "block.mantori.jelly": "Jelly",
+  "item.mantori.jelly": "Jelly",
   "item.mantori.beetleberry": "Beetleberry",
+  "item.mantori.dragons_breath": "Dragon's Breath",
+  "item.mantori.dragons_breath_seed": "Dragon's Breath Seeds",
 
 
   "mantori.wing_flap": "Wings flap",
@@ -39,6 +52,8 @@
 
   "entity.mantori.greater_aphid": "Greater Aphid",
   "entity.mantori.lesser_aphid": "Lesser Aphid",
+
+  "enchantment.mantori.cursed_thorns": "Thorns",
 
   "itemGroup.mantori.mantori": "Aphid Additions"
 }

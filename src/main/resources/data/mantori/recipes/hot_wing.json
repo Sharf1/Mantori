@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mantori:hot_sauce"
+    },
+    {
+      "item": "mantori:end_wing"
+    }
+  ],
+  "result": {
+    "item": "mantori:hot_wing"
+  }
+}

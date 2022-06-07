@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "mantori:block/jelly"
+    },
+    "bites=1": {
+      "model": "mantori:block/jelly_slice1"
+    },
+    "bites=2": {
+      "model": "mantori:block/jelly_slice2"
+    },
+    "bites=3": {
+      "model": "mantori:block/jelly_slice3"
+    },
+    "bites=4": {
+      "model": "mantori:block/jelly_slice4"
+    },
+    "bites=5": {
+      "model": "mantori:block/jelly_slice5"
+    },
+    "bites=6": {
+      "model": "mantori:block/jelly_slice6"
+    }
+  }
+}

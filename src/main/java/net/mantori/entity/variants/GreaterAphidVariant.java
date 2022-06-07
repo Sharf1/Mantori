@@ -1,10 +1,10 @@
 package net.mantori.entity.variants;
 
 import net.minecraft.util.Util;
+import net.minecraft.util.math.random.Random;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Random;
 
 public enum GreaterAphidVariant {
     NATURAL(0, "natural", true),

@@ -40,7 +40,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
     }
 
     @Override
-    public Identifier getTextureLocation(GreaterAphidEntity entity) {
+    public Identifier getTexture(GreaterAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_aphid/greater_child.png");
         else return LOCATION_BY_VARIANT.get(entity.getVariant());
     }

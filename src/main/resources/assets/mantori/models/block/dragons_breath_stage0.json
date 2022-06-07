@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "mantori:block/dragons_breath_stage0"
+  }
+}

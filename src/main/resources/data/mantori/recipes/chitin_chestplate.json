@@ -1,13 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "mantori:armor_recipe",
   "pattern": [
     "# #",
-    "###",
+    "#*#",
     "###"
   ],
   "key": {
     "#": {
       "item": "mantori:chitin"
+    },
+    "*": {
+      "item": "mantori:chitin_spike"
     }
   },
   "result": {

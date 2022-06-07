@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "***",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mantori:beetleberry_jam"
+    },
+    "*": {
+      "item": "mantori:honeydew_bottle"
+    }
+  },
+  "result": {
+    "item": "mantori:jelly"
+  }
+}

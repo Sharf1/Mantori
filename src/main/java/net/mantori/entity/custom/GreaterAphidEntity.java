@@ -20,6 +20,7 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -30,6 +31,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -45,9 +47,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Arrays;
-import java.util.Random;
 
-public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
+public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatable {
     private static final Item[] BREEDING_INGREDIENT = {ModItems.BEETLEBERRY};
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final TrackedData<Integer> VARIANT =
@@ -56,7 +57,7 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
     protected int eatingTicks = 0;
 
 
-    public GreaterAphidEntity(EntityType<? extends HorseBaseEntity> entityType, World world) {
+    public GreaterAphidEntity(EntityType<? extends AbstractHorseEntity> entityType, World world) {
         super(entityType, world);
         this.ignoreCameraFrustum = true;
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0f);
@@ -78,7 +79,7 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
     }
 
     @Override
-    protected void initAttributes() {
+    protected void initAttributes(Random random) {
         this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(this.getChildHealthBonus());
         this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(this.getChildMovementSpeedBonus());
         this.getAttributeInstance(EntityAttributes.HORSE_JUMP_STRENGTH).setBaseValue(this.getChildJumpStrengthBonus());
@@ -247,29 +248,34 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
                 this.openInventory(player);
                 return ActionResult.success(this.world.isClient);
             }
+
             if (this.hasPassengers()) {
                 return super.interactMob(player, hand);
             }
         }
-        if (this.isBaby()) {
-            this.playAngrySound();
-            return ActionResult.success(this.world.isClient);
-        }
+
         if (!itemStack.isEmpty()) {
             if (this.isBreedingItem(itemStack)) {
                 return this.interactBird(player, itemStack);
             }
+
             ActionResult actionResult = itemStack.useOnEntity(player, this, hand);
             if (actionResult.isAccepted()) {
                 return actionResult;
             }
+
             if (!this.isTame()) {
                 this.playAngrySound();
                 return ActionResult.success(this.world.isClient);
             }
-        } else
+        }
+
+        if (this.isBaby()) {
+            return super.interactMob(player, hand);
+        } else {
             this.putPlayerOnBack(player);
-        return ActionResult.success(this.world.isClient);
+            return ActionResult.success(this.world.isClient);
+        }
     }
     public ActionResult interactBird(PlayerEntity player, ItemStack stack) {
         boolean bl = this.receiveFood(player, stack);
@@ -306,7 +312,7 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
         }
         if (bl) {
             this.playEatingAnimation();
-            this.emitGameEvent(GameEvent.EAT, this.getCameraBlockPos());
+            this.emitGameEvent(GameEvent.EAT);
         }
         return bl;
     }
@@ -364,57 +370,63 @@ public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
 
     @Override
     public void travel(Vec3d movementInput) {
-        if (!this.isAlive()) {
-            return;
-        }
-        if (!(this.hasPassengers() && this.canBeControlledByRider() && this.isTame())) {
-            this.airStrafingSpeed = 0.02f;
-            super.travel(movementInput);
-            return;
-        }
-        LivingEntity livingEntity = (LivingEntity)this.getPrimaryPassenger();
-        this.setYaw(livingEntity.getYaw());
-        this.prevYaw = this.getYaw();
-        this.setPitch(livingEntity.getPitch() * 0.5f);
-        this.setRotation(this.getYaw(), this.getPitch());
-        this.headYaw = this.bodyYaw = this.getYaw();
-        float f = livingEntity.sidewaysSpeed * 0.5f;
-        float g = livingEntity.forwardSpeed;
-        if (g <= 0.0f) {
-            g *= 0.25f;
-            this.soundTicks = 0;
-        }
-        if (this.onGround && this.jumpStrength == 0.0f && this.isAngry() && !this.jumping && !this.isTame()) {
-            f = 0.0f;
-            g = 0.0f;
-        }
-        if (this.jumpStrength > 0.0f && !this.isInAir() && this.onGround) {
-            double d = this.getJumpStrength() * (double)this.jumpStrength * (double)this.getJumpVelocityMultiplier();
-            double e = d + this.getJumpBoostVelocityModifier();
-            Vec3d vec3d = this.getVelocity();
-            this.setVelocity(vec3d.x, e, vec3d.z);
-            this.setInAir(true);
-            this.velocityDirty = true;
-            if (g > 0.0f) {
-                float h = MathHelper.sin(this.getYaw() * ((float)Math.PI / 180));
-                float i = MathHelper.cos(this.getYaw() * ((float)Math.PI / 180));
-                this.setVelocity(this.getVelocity().add(-0.4f * h * this.jumpStrength, 0.0, 0.4f * i * this.jumpStrength));
+        if (this.isAlive()) {
+            LivingEntity livingEntity = this.getPrimaryPassenger();
+            if (this.hasPassengers() && livingEntity != null) {
+                this.setYaw(livingEntity.getYaw());
+                this.prevYaw = this.getYaw();
+                this.setPitch(livingEntity.getPitch() * 0.5F);
+                this.setRotation(this.getYaw(), this.getPitch());
+                this.bodyYaw = this.getYaw();
+                this.headYaw = this.bodyYaw;
+                float f = livingEntity.sidewaysSpeed * 0.5F;
+                float g = livingEntity.forwardSpeed;
+                if (g <= 0.0F) {
+                    g *= 0.25F;
+                    this.soundTicks = 0;
+                }
+
+                if (this.onGround && this.jumpStrength == 0.0F && this.isAngry() && !this.jumping) {
+                    f = 0.0F;
+                    g = 0.0F;
+                }
+
+                if (this.jumpStrength > 0.0F && !this.isInAir() && this.onGround) {
+                    double d = this.getJumpStrength() * (double)this.jumpStrength * (double)this.getJumpVelocityMultiplier();
+                    double e = d + this.getJumpBoostVelocityModifier();
+                    Vec3d vec3d = this.getVelocity();
+                    this.setVelocity(vec3d.x, e, vec3d.z);
+                    this.setInAir(true);
+                    this.velocityDirty = true;
+                    if (g > 0.0F) {
+                        float h = MathHelper.sin(this.getYaw() * 0.017453292F);
+                        float i = MathHelper.cos(this.getYaw() * 0.017453292F);
+                        this.setVelocity(this.getVelocity().add((double)(-0.4F * h * this.jumpStrength), 0.0, (double)(0.4F * i * this.jumpStrength)));
+                    }
+
+                    this.jumpStrength = 0.0F;
+                }
+
+                this.airStrafingSpeed = this.getMovementSpeed() * 0.1F;
+                if (this.isLogicalSideForUpdatingMovement()) {
+                    this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+                    super.travel(new Vec3d((double)f, movementInput.y, (double)g));
+                } else if (livingEntity instanceof PlayerEntity) {
+                    this.setVelocity(Vec3d.ZERO);
+                }
+
+                if (this.onGround) {
+                    this.jumpStrength = 0.0F;
+                    this.setInAir(false);
+                }
+
+                this.updateLimbs(this, false);
+                this.tryCheckBlockCollision();
+            } else {
+                this.airStrafingSpeed = 0.02F;
+                super.travel(movementInput);
             }
-            this.jumpStrength = 0.0f;
         }
-        this.airStrafingSpeed = this.getMovementSpeed() * 0.1f;
-        if (this.isLogicalSideForUpdatingMovement()) {
-            this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
-            super.travel(new Vec3d(f, movementInput.y, g));
-        } else if (livingEntity instanceof PlayerEntity) {
-            this.setVelocity(Vec3d.ZERO);
-        }
-        if (this.onGround) {
-            this.jumpStrength = 0.0f;
-            this.setInAir(false);
-        }
-        this.updateLimbs(this, false);
-        this.tryCheckBlockCollision();
     }
 
     protected void playJumpSound() {

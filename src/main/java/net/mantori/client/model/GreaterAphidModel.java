@@ -11,21 +11,6 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 public class GreaterAphidModel extends  AnimatedGeoModel<GreaterAphidEntity>{
 
-    @Override
-    public Identifier getModelLocation(GreaterAphidEntity entity) {
-        return new Identifier(Mantori.MOD_ID, "geo/greater.geo.json");
-    }
-
-    @Override
-    public Identifier getTextureLocation(GreaterAphidEntity entity) {
-        if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_aphid/greater_child.png");
-        else return GreaterAphidRenderer.LOCATION_BY_VARIANT.get(entity.getVariant());
-    }
-
-    @Override
-    public Identifier getAnimationFileLocation(GreaterAphidEntity entity) {
-        return new Identifier(Mantori.MOD_ID, "animations/greater.animation.json");
-    }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
@@ -38,5 +23,21 @@ public class GreaterAphidModel extends  AnimatedGeoModel<GreaterAphidEntity>{
             head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
             head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
         }
+    }
+
+    @Override
+    public Identifier getModelResource(GreaterAphidEntity entity) {
+        return new Identifier(Mantori.MOD_ID, "geo/greater.geo.json");
+    }
+
+    @Override
+    public Identifier getTextureResource(GreaterAphidEntity entity) {
+        if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_aphid/greater_child.png");
+        else return GreaterAphidRenderer.LOCATION_BY_VARIANT.get(entity.getVariant());
+    }
+
+    @Override
+    public Identifier getAnimationResource(GreaterAphidEntity animatable) {
+        return new Identifier(Mantori.MOD_ID, "animations/greater.animation.json");
     }
 }

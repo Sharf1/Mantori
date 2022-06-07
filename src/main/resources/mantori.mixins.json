@@ -7,8 +7,7 @@
   ],
   "client": [
     "MantoriMixin",
-    "HorseBaseEntityAccessor",
-    "StructureFeatureAccessor"
+    "HorseBaseEntityAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

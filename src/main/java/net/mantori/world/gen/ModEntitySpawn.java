@@ -13,9 +13,9 @@ import net.minecraft.world.biome.Biome;
 
 public class ModEntitySpawn {
     public static void addEntitySpawn() {
-        BiomeModifications.addSpawn(BiomeSelectors.categories(Biome.Category.THEEND), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
                 ModEntities.LESSER_APHID, 80, 2, 6);
-        BiomeModifications.addSpawn(BiomeSelectors.categories(Biome.Category.THEEND), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
                 ModEntities.GREATER_APHID, 70, 2, 4);
 
         SpawnRestrictionAccessor.callRegister(ModEntities.LESSER_APHID, SpawnRestriction.Location.ON_GROUND,

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mantori:honeydew_bottle"
+    },
+    {
+      "item": "mantori:end_wing"
+    }
+  ],
+  "result": {
+    "item": "mantori:glazed_wing"
+  }
+}
