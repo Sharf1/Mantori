@@ -7,7 +7,9 @@
   ],
   "client": [
     "MantoriMixin",
-    "HorseBaseEntityAccessor"
+    "HorseBaseEntityAccessor",
+    "DiggerItemMixin",
+    "ItemStackMixin"
   ],
   "injectors": {
     "defaultRequire": 1

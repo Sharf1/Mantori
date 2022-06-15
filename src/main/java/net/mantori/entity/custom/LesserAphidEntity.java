@@ -1,6 +1,7 @@
 package net.mantori.entity.custom;
 
 import net.mantori.entity.ModEntities;
+import net.mantori.entity.goals.JumpAroundGoal;
 import net.mantori.entity.variants.LesserAphidVariant;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
@@ -69,8 +70,9 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
         this.goalSelector.add(3, new TemptGoal(this, 0.6D, Ingredient.ofItems(ModItems.BEETLEBERRY), false));
         this.goalSelector.add(4, new FollowParentGoal(this, 0.8D));
-        this.goalSelector.add(5, new WanderAroundGoal(this, 0.5));
-        this.goalSelector.add(6, new WanderAroundFarGoal(this, 0.5));
+        this.goalSelector.add(4, new WanderAroundGoal(this, 0.6));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.8D));
+        this.goalSelector.add(6, new JumpAroundGoal(this, 1.0D));
         this.goalSelector.add(7, new LookAroundGoal(this));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
     }
@@ -90,6 +92,18 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         } else {
             return super.interactMob(player, hand);
         }
+    }
+
+    public int fleeTime = 0;
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.fleeTime > 0) {
+            this.fleeTime--;
+        }
+
+        this.setNoDrag(!this.isOnGround());
     }
 
     private static boolean shouldBabyBeDifferent(Random random) {
@@ -165,6 +179,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
 
     private <E extends IAnimatable> PlayState locomotion_predicate(AnimationEvent<E> event) {
         LesserAphidEntity lesserAphid = (LesserAphidEntity) event.getAnimatable();
+
 
         if (this.isInAir()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.fly", true));

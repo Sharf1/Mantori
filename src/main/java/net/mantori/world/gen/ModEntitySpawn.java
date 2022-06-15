@@ -10,12 +10,13 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 
 public class ModEntitySpawn {
     public static void addEntitySpawn() {
-        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.THE_END), SpawnGroup.CREATURE,
                 ModEntities.LESSER_APHID, 80, 2, 6);
-        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.THE_END), SpawnGroup.CREATURE,
                 ModEntities.GREATER_APHID, 70, 2, 4);
 
         SpawnRestrictionAccessor.callRegister(ModEntities.LESSER_APHID, SpawnRestriction.Location.ON_GROUND,

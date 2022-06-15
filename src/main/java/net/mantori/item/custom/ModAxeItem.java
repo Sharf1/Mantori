@@ -1,5 +1,10 @@
 package net.mantori.item.custom;
 
+import net.mantori.enchantments.ModEnchantments;
+import net.mantori.interfaces.InitialStackStateProvider;
+import net.mantori.item.ModToolMaterial;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -7,14 +12,23 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 
-public class ModAxeItem extends AxeItem {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ModAxeItem extends AxeItem implements InitialStackStateProvider {
     public ModAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
 
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 100, 0, false, false, false), attacker);
-        return super.postHit(stack, target, attacker);
+    public void initializeState(ItemStack stack){
+        Map<Enchantment, Integer> defaultEnchants = new HashMap<>();
+        int shulkBlessing = 0;
+
+        if (this.getMaterial()== ModToolMaterial.CHITIN) shulkBlessing = 1;
+        if (shulkBlessing>0) {
+            defaultEnchants.put(ModEnchantments.SHULKERS_BLESSING, shulkBlessing);
+            EnchantmentHelper.set(defaultEnchants, stack);
+        }
     }
 }

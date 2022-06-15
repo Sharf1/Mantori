@@ -1,7 +1,12 @@
 package net.mantori.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+import net.mantori.enchantments.ModEnchantments;
+import net.mantori.interfaces.InitialStackStateProvider;
 import net.mantori.item.ModArmorMaterial;
+import net.mantori.item.ModToolMaterial;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -12,9 +17,10 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class ModArmorItem extends ArmorItem {
+public class ModArmorItem extends ArmorItem implements InitialStackStateProvider {
     private static final Map<ArmorMaterial, StatusEffectInstance> MATERIAL_TO_EFFECT_MAP =
             (new ImmutableMap.Builder<ArmorMaterial, StatusEffectInstance>())
                     .put(ModArmorMaterial.CHITIN,
@@ -83,4 +89,15 @@ public class ModArmorItem extends ArmorItem {
                 leggings.getMaterial() == material && boots.getMaterial() == material;
     }
 
+    @Override
+    public void initializeState(ItemStack stack) {
+        Map<Enchantment, Integer> defaultEnchants = new HashMap<>();
+        int endLevel = 0;
+        if (this.getMaterial()== ModArmorMaterial.CHITIN) endLevel = 3;
+
+        if (endLevel>0) {
+            defaultEnchants.put(ModEnchantments.CURSED_THORNS, endLevel);
+            EnchantmentHelper.set(defaultEnchants, stack);
+        }
+    }
 }

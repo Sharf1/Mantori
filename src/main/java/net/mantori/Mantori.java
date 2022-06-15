@@ -2,7 +2,6 @@ package net.mantori;
 
 import net.fabricmc.api.ModInitializer;
 import net.mantori.block.ModBlocks;
-import net.mantori.craftingrecipe.ArmorRecipe;
 import net.mantori.enchantments.ModEnchantments;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
@@ -25,7 +24,6 @@ public class Mantori implements ModInitializer {
         ModItems.registerModItems();
         ModSounds.registerSounds();
 
-        ArmorRecipe.registerRecipeSerializer();
         ModEnchantments.registerModEnchantments();
 
         ModRegistries.registerModStuff();

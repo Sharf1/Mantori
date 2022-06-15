@@ -10,7 +10,7 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum ModToolMaterial implements ToolMaterial {
-    CHITIN(MiningLevels.NETHERITE, 800, 15.0f, 4.0f, 25, () -> Ingredient.ofItems(ModItems.CHITIN_SPIKE));
+    CHITIN(MiningLevels.NETHERITE, 1600, 8.0f, 4.0f, 20, () -> Ingredient.ofItems(ModItems.CHITIN_SPIKE));
 
     private final int miningLevel;
     private final int itemDurability;

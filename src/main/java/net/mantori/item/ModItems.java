@@ -47,13 +47,13 @@ public class ModItems {
             new AliasedBlockItem(ModBlocks.DRAGONS_BREATH_BUSH, new FabricItemSettings().group(ModItemGroup.MANTORI)));
 
     public static final Item CHITIN_SWORD = registerItem("chitin_sword",
-            new LevitationSwordItem(ModToolMaterial.CHITIN, 3, -2.4f,
+            new ModSwordItem(ModToolMaterial.CHITIN, 3, -2.4f,
                     new FabricItemSettings().group(ModItemGroup.MANTORI)));
     public static final Item CHITIN_AXE = registerItem("chitin_axe",
             new ModAxeItem(ModToolMaterial.CHITIN, 5, -2.9f,
                     new FabricItemSettings().group(ModItemGroup.MANTORI)));
     public static final Item CHITIN_SHOVEL = registerItem("chitin_shovel",
-            new ShovelItem(ModToolMaterial.CHITIN, 1.5f, -3f,
+            new ModShovelItem(ModToolMaterial.CHITIN, 1.5f, -3f,
                     new FabricItemSettings().group(ModItemGroup.MANTORI)));
     public static final Item CHITIN_PICKAXE = registerItem("chitin_pickaxe",
             new ModPickaxeItem(ModToolMaterial.CHITIN, 1, -2.8f,
