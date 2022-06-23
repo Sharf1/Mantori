@@ -1,8 +1,8 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "mantori:end_structure",
   "start_pool": "mantori:sulfur_stables",
-  "size": 2,
-  "max_distance_from_center": 80,
+  "size": 1,
+  "max_distance_from_center": 20,
   "biomes": "#mantori:has_structure/sulfur_stables",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
@@ -10,7 +10,6 @@
     "absolute": 0
   },
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-  "use_expansion_hack": false,
   "spawn_overrides": {
     "creature": {
       "bounding_box": "piece",
