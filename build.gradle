@@ -31,7 +31,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.4'
-	modImplementation "com.github.quiqueck:BCLib:2.0.4"
+	modImplementation "com.github.quiqueck:BCLib:2.0.5"
 }
 
 processResources {
