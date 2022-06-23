@@ -13,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
 
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
 
     public GreaterAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new GreaterAphidModel());
+        this.addLayer(new LayerGlowingAreasGeo<GreaterAphidEntity>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEyes));
     }
 
     @Override
