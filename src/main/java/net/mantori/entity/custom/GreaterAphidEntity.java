@@ -104,8 +104,8 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatab
 
             float f = MathHelper.sin(this.bodyYaw * 0.017453292F);
             float g = MathHelper.cos(this.bodyYaw * 0.017453292F);
-            float h = 0.7F;
-            float i = 0.15F;
+            float h = 0.4F;
+            float i = 0.33F;
             passenger.setPosition(this.getX() + (double) (h * f), this.getY() + this.getMountedHeightOffset() + passenger.getHeightOffset() + (double) i, this.getZ() - (double) (h * g));
             if (passenger instanceof LivingEntity) {
                 ((LivingEntity) passenger).bodyYaw = this.bodyYaw;
