@@ -13,7 +13,7 @@
     "sources": "https://github.com/Sharffffff/Mantori"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/mantori/icon.png",
 
   "environment": "*",
@@ -31,9 +31,11 @@
 
   "depends": {
     "fabricloader": ">=0.14.6",
-    "fabric": "*",
+    "fabric": ">=0.55.0",
     "minecraft": "1.19",
-    "java": ">=17"
+    "java": ">=17",
+    "bclib": ">=2.0.4",
+    "geckolib3": ">=3.1.4"
   },
   "suggests": {
     "another-mod": "*"
