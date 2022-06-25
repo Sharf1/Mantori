@@ -133,7 +133,9 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
     }
 
 
-
+    public boolean canBeLeashedBy(PlayerEntity player) {
+        return false;
+    }
 
 
     @Override
