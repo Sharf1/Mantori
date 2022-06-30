@@ -46,7 +46,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
 
     public GreaterAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new GreaterAphidModel());
-        this.addLayer(new LayerGlowingAreasGeo<GreaterAphidEntity>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
     }
 
     @Override
@@ -75,7 +75,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
         super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
 
         if (entity instanceof MobEntity) {
-            Entity leashHolder = ((MobEntity) entity).getHoldingEntity();
+            Entity leashHolder = (entity).getHoldingEntity();
             if (leashHolder != null) {
                 this.renderLeash(entity, partialTicks, stack, bufferIn, leashHolder);
             }
@@ -89,7 +89,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
         poseStack.push();
         Vec3d vec3d = leashHolder.getLeashPos(partialTicks);
         double d = (double)(MathHelper.lerp(partialTicks, entity.bodyYaw, entity.prevBodyYaw) * ((float)Math.PI / 180)) + 1.5707963267948966;
-        Vec3d vec3d2 = ((Entity)entity).getLeashOffset();
+        Vec3d vec3d2 = (entity).getLeashOffset();
         double e = Math.cos(d) * vec3d2.z + Math.sin(d) * vec3d2.x;
         double f = Math.sin(d) * vec3d2.z - Math.cos(d) * vec3d2.x;
         double g = MathHelper.lerp(partialTicks, entity.prevX, entity.getX()) + e;
