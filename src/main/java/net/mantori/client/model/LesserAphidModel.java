@@ -25,18 +25,18 @@ public class LesserAphidModel extends  AnimatedGeoModel<LesserAphidEntity>{
     }
 
     @Override
-    public Identifier getModelResource(LesserAphidEntity entity) {
+    public Identifier getModelLocation(LesserAphidEntity entity) {
         return new Identifier(Mantori.MOD_ID, "geo/lesser.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(LesserAphidEntity entity) {
+    public Identifier getTextureLocation(LesserAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/lesser_aphid/lesser_child.png");
         else return LesserAphidRenderer.LOCATION_BY_VARIANT.get(entity.getVariant());
     }
 
     @Override
-    public Identifier getAnimationResource(LesserAphidEntity animatable) {
+    public Identifier getAnimationFileLocation(LesserAphidEntity animatable) {
         return new Identifier(Mantori.MOD_ID, "animations/lesser.animation.json");
     }
 }

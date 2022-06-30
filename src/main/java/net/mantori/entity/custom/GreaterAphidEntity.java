@@ -20,7 +20,6 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.world.ServerWorld;
@@ -31,7 +30,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -47,8 +45,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.Arrays;
+import java.util.Random;
 
-public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatable {
+public class GreaterAphidEntity extends HorseBaseEntity implements IAnimatable {
     private static final Item[] BREEDING_INGREDIENT = {ModItems.BEETLEBERRY};
     private final AnimationFactory factory = new AnimationFactory(this);
     private static final TrackedData<Integer> VARIANT =
@@ -57,7 +56,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatab
     protected int eatingTicks = 0;
 
 
-    public GreaterAphidEntity(EntityType<? extends AbstractHorseEntity> entityType, World world) {
+    public GreaterAphidEntity(EntityType<? extends HorseBaseEntity> entityType, World world) {
         super(entityType, world);
         this.ignoreCameraFrustum = true;
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0f);
@@ -79,7 +78,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatab
     }
 
     @Override
-    protected void initAttributes(Random random) {
+    protected void initAttributes() {
         this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).setBaseValue(this.getChildHealthBonus());
         this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(this.getChildMovementSpeedBonus());
         this.getAttributeInstance(EntityAttributes.HORSE_JUMP_STRENGTH).setBaseValue(this.getChildJumpStrengthBonus());
@@ -373,7 +372,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatab
     @Override
     public void travel(Vec3d movementInput) {
         if (this.isAlive()) {
-            LivingEntity livingEntity = this.getPrimaryPassenger();
+            LivingEntity livingEntity = (LivingEntity) this.getPrimaryPassenger();
             if (this.hasPassengers() && livingEntity != null) {
                 this.setYaw(livingEntity.getYaw());
                 this.prevYaw = this.getYaw();

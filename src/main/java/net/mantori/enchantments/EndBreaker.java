@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import ru.bclib.api.tag.CommonBlockTags;
 
 public class EndBreaker extends Enchantment {
     protected EndBreaker(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
@@ -37,9 +37,7 @@ public class EndBreaker extends Enchantment {
     }
 
     public static float getDestroySpeedMultiplier(BlockState state, float baseSpeed, float level){
-        if ((state.isIn(CommonBlockTags.END_STONES) ||
-                state.isIn(CommonBlockTags.END_ORES) ||
-                state.isIn(CommonBlockTags.IS_OBSIDIAN))) {
+        if ((state.isIn(CommonBlockTags.END_STONES))) {
             float speed = baseSpeed * level * 3;
             return speed;
         }

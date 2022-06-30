@@ -50,7 +50,7 @@ public class LesserAphidRenderer extends GeoEntityRenderer<LesserAphidEntity> {
     public LesserAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new LesserAphidModel());
 
-        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureLocation, getGeoModelProvider()::getModelLocation, RenderLayer::getEyes));
     }
 
     @Override

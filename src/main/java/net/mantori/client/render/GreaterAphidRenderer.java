@@ -46,7 +46,7 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
 
     public GreaterAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new GreaterAphidModel());
-        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureLocation, getGeoModelProvider()::getModelLocation, RenderLayer::getEyes));
     }
 
     @Override

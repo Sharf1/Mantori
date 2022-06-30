@@ -30,18 +30,18 @@ public class GreaterAphidModel extends  AnimatedGeoModel<GreaterAphidEntity>{
     }
 
     @Override
-    public Identifier getModelResource(GreaterAphidEntity entity) {
+    public Identifier getModelLocation(GreaterAphidEntity entity) {
         return new Identifier(Mantori.MOD_ID, "geo/greater.geo.json");
     }
 
     @Override
-    public Identifier getTextureResource(GreaterAphidEntity entity) {
+    public Identifier getTextureLocation(GreaterAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_aphid/greater_child.png");
         else return GreaterAphidRenderer.LOCATION_BY_VARIANT.get(entity.getVariant());
     }
 
     @Override
-    public Identifier getAnimationResource(GreaterAphidEntity animatable) {
+    public Identifier getAnimationFileLocation(GreaterAphidEntity animatable) {
         return new Identifier(Mantori.MOD_ID, "animations/greater.animation.json");
     }
 }
