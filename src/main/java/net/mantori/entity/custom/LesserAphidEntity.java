@@ -183,7 +183,9 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         LesserAphidEntity lesserAphid = (LesserAphidEntity) event.getAnimatable();
 
 
-        if (this.isInAir()) {
+        if (this.isTouchingWater()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.swim", true));
+        } else if (this.isInAir()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.fly", true));
         } else if (event.isMoving()) {
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.walk", true));
