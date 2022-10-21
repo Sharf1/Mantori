@@ -9,7 +9,6 @@
   "start_height": {
     "absolute": 0
   },
-  "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "spawn_overrides": {
     "creature": {
       "bounding_box": "piece",

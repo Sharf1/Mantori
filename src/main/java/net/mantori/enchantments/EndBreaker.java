@@ -4,7 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import org.betterx.bclib.api.v2.tag.CommonBlockTags;
+import org.betterx.worlds.together.tag.v3.CommonBlockTags;
 
 public class EndBreaker extends Enchantment {
     protected EndBreaker(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
