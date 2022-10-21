@@ -2,7 +2,6 @@ package net.mantori.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.mantori.Mantori;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
 import net.minecraft.util.Identifier;
@@ -62,9 +61,20 @@ public class EndStructure extends Structure {
         }
 
         int startY = this.startHeight.get(context.random(), new HeightContext(context.chunkGenerator(), context.world()));
+        ChunkPos chunkpos = context.chunkPos();
+        int heightmapY = context.chunkGenerator().getHeightInGround(
+                chunkpos.getStartX(),
+                chunkpos.getStartZ(),
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                context.world(),
+                context.noiseConfig());
+        if (heightmapY < 40) {
+            return Optional.empty();
+        }
+
 
         ChunkPos chunkPos = context.chunkPos();
-        BlockPos blockPos = new BlockPos(chunkPos.getStartX(), startY, chunkPos.getStartZ());
+        BlockPos blockPos = new BlockPos(chunkPos.getStartX(), startY + heightmapY, chunkPos.getStartZ());
 
         Optional<StructurePosition> structurePiecesGenerator =
                 StructurePoolBasedGenerator.generate(
@@ -72,21 +82,10 @@ public class EndStructure extends Structure {
                         this.startPool,
                         this.startJigsawName,
                         this.size,
-                        blockPos, // Where to spawn the structure.
-                        false, // "useExpansionHack" This is for legacy villages to generate properly. You should keep this false always.
-                        this.projectStartToHeightmap, // Adds the terrain height's y value to the passed in blockpos's y value. (This uses WORLD_SURFACE_WG heightmap which stops at top water too)
-                        // Here, blockpos's y value is 60 which means the structure spawn 60 blocks above terrain height.
-                        // Set this to false for structure to be place only at the passed in blockpos's Y value instead.
-                        // Definitely keep this false when placing structures in the nether as otherwise, heightmap placing will put the structure on the Bedrock roof.
-                        this.maxDistanceFromCenter); // Maximum limit for how far pieces can spawn from center. You cannot set this bigger than 128 or else pieces gets cutoff.
-
-        /*
-         * Note, you are always free to make your own StructurePoolBasedGenerator class and implementation of how the structure
-         * should generate. It is tricky but extremely powerful if you are doing something that vanilla's jigsaw system cannot do.
-         * Such as for example, forcing 3 pieces to always spawn every time, limiting how often a piece spawns, or remove the intersection limitation of pieces.
-         */
-
-        // Return the pieces generator that is now set up so that the game runs it when it needs to create the layout of structure pieces.
+                        blockPos,
+                        false,
+                        this.projectStartToHeightmap,
+                        this.maxDistanceFromCenter);
         return structurePiecesGenerator;
     }
 
@@ -95,12 +94,8 @@ public class EndStructure extends Structure {
         return ModStructures.END_STRUCTURE;
     }
 
-    private static boolean extraSpawningChecks(Context context) {
-        // Grabs the chunk position we are at
+    public static boolean extraSpawningChecks(Context context) {
         ChunkPos chunkpos = context.chunkPos();
-
-        // Checks to make sure our structure does not spawn above land that's higher than y = 150
-        // to demonstrate how this method is good for checking extra conditions for spawning
         return context.chunkGenerator().getHeightInGround(
                 chunkpos.getStartX(),
                 chunkpos.getStartZ(),

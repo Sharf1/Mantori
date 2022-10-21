@@ -113,7 +113,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements IAnimatab
     }
 
     public boolean canBeLeashedBy(PlayerEntity player) {
-        return false;
+        return true;
     }
 
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {

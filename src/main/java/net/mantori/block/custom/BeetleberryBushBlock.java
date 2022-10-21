@@ -51,7 +51,7 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         boolean bl;
         int i = state.get(AGE);
-        boolean bl2 = bl = i == 3;
+        boolean  bl2 = bl = i == 3;
         if (!bl && player.getStackInHand(hand).isOf(Items.BONE_MEAL)) {
             return ActionResult.PASS;
         }
@@ -59,7 +59,7 @@ public class BeetleberryBushBlock extends SweetBerryBushBlock {
             int j = 1 + world.random.nextInt(2);
             SweetBerryBushBlock.dropStack(world, pos, new ItemStack(ModItems.BEETLEBERRY, j + (bl ? 1 : 0)));
             world.playSound(null, pos, SoundEvents.BLOCK_SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0f, 0.8f + world.random.nextFloat() * 0.4f);
-            world.setBlockState(pos, (BlockState)state.with(AGE, 1), Block.NOTIFY_LISTENERS);
+            world.setBlockState(pos, state.with(AGE, 1), Block.NOTIFY_LISTENERS);
             return ActionResult.success(world.isClient);
         }
         return super.onUse(state, world, pos, player, hand, hit);
