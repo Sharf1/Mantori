@@ -32,12 +32,8 @@
   "depends": {
     "fabricloader": "0.14.x",
     "fabric": ">=0.60.0",
-    "minecraft": "1.19.2",
+    "minecraft": "1.19.3",
     "java": ">=17",
-    "bclib": "2.1.x",
-    "geckolib3": ">=3.1.26"
-  },
-  "breaks": {
-    "bclib": "<2.1.1"
+    "bclib": "2.2.x"
   }
 }

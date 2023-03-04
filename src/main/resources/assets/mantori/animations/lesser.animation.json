@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.lesser.walk": {
+		"move.walk": {
 			"loop": true,
 			"bones": {
 				"body": {
@@ -63,7 +63,7 @@
 				}
 			}
 		},
-		"animation.lesser.fly": {
+		"move.fly": {
 			"loop": true,
 			"bones": {
 				"body": {
@@ -137,7 +137,7 @@
 				}
 			}
 		},
-		"animation.lesser.idle": {
+		"misc.idle": {
 			"loop": true,
 			"bones": {
 				"tail": {

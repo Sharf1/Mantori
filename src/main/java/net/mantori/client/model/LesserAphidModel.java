@@ -4,25 +4,14 @@ import net.mantori.Mantori;
 import net.mantori.client.render.LesserAphidRenderer;
 import net.mantori.entity.custom.LesserAphidEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
-public class LesserAphidModel extends  AnimatedGeoModel<LesserAphidEntity>{
+public class LesserAphidModel extends DefaultedEntityGeoModel<LesserAphidEntity> {
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public void setLivingAnimations(LesserAphidEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
-        IBone head = this.getAnimationProcessor().getBone("head");
-
-        EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
-        if (head != null) {
-            head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
-            head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
-        }
+    public LesserAphidModel() {
+        super(new Identifier(Mantori.MOD_ID, "entity/lesser_aphid"), true);
     }
+
 
     @Override
     public Identifier getModelResource(LesserAphidEntity entity) {

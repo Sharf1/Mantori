@@ -32,17 +32,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 
-public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
+    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
 
     public float maxWingDeviation;
@@ -107,7 +107,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
     }
 
     private static boolean shouldBabyBeDifferent(Random random) {
-        return random.nextInt(50) == 0;
+        return random.nextInt(30) == 0;
     }
 
 
@@ -162,7 +162,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         this.playSound(ModSounds.FOOTSTEPS, 0.15f, 1.0f);
     }
 
-    @Override
+
     protected boolean hasWings() {
         return this.speed > this.field_28640;
     }
@@ -175,27 +175,31 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
 
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "locomotion_controller", 5, this::locomotion_predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar animationData) {
+        animationData.add(
+                LesserAphidEntity.genericWalkJumpIdleController(this)
+        );
     }
 
-    private <E extends IAnimatable> PlayState locomotion_predicate(AnimationEvent<E> event) {
-        LesserAphidEntity lesserAphid = (LesserAphidEntity) event.getAnimatable();
 
-
-        if (this.isTouchingWater()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.swim", true));
-        } else if (this.isInAir()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.fly", true));
-        } else if (event.isMoving()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.walk", true));
-        } else
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.idle", true));
-        return PlayState.CONTINUE;
+    public static <T extends Entity & GeoAnimatable> AnimationController<T> genericWalkJumpIdleController(T entity) {
+        return new AnimationController<T>(entity, "Walk/Run/Idle", 0, state -> {
+            if (state.isMoving()) {
+                return state.setAndContinue(entity.isOnGround() ? WALK : FLY);
+            }
+            else {
+                return state.setAndContinue(IDLE);
+            }
+        });
     }
+    public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
+    public static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
+
+    public static final RawAnimation FLY = RawAnimation.begin().thenLoop("move.fly");
+
 
     @Override
-    public AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return factory;
     }
     public boolean isInAir() {

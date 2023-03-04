@@ -18,6 +18,38 @@
         }
       ]
     },
+    { "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mantori:beetleberry"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.1,
+          "looting_multiplier": 0.2
+        }
+      ]
+    },
+    { "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mantori:dragons_breath_seed"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.01,
+          "looting_multiplier": 0.2
+        }
+      ]
+    },
     {
       "rolls": 1.0,
       "bonus_rolls": 0.0,

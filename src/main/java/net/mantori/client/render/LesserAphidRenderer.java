@@ -6,7 +6,6 @@ import net.mantori.client.model.LesserAphidModel;
 import net.mantori.entity.custom.GreaterAphidEntity;
 import net.mantori.entity.custom.LesserAphidEntity;
 import net.mantori.entity.variants.LesserAphidVariant;
-import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,13 +15,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.LightType;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
+import software.bernie.geckolib.cache.object.BakedGeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 
 import java.util.Map;
 
@@ -50,7 +45,7 @@ public class LesserAphidRenderer extends GeoEntityRenderer<LesserAphidEntity> {
     public LesserAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new LesserAphidModel());
 
-        this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+        addRenderLayer(new AutoGlowingGeoLayer<>(this));
     }
 
     @Override
@@ -60,17 +55,16 @@ public class LesserAphidRenderer extends GeoEntityRenderer<LesserAphidEntity> {
     }
 
     @Override
-    public RenderLayer getRenderType(LesserAphidEntity animatable, float partialTicks, MatrixStack stack,
-                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
-                                     int packedLightIn, Identifier textureLocation) {
+    public void preRender(MatrixStack stack, LesserAphidEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer,
+                          float partialTick, int packedLight, int packedOverlay, float red, float green, float blue,
+                          float alpha) {
+        super.preRender(stack, animatable, model, bufferSource, buffer, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         if(animatable.isBaby()) {
             stack.scale(0.4f,0.4f,0.4f);
         } else {
             stack.scale(1f,1f,1f);
         }
 
-
-        return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 
 
