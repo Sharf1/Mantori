@@ -1,4 +1,4 @@
-package net.mantori.datagen;
+package net.mantori.data;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;

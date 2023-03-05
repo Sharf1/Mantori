@@ -1,7 +1,8 @@
-package net.mantori.datagen;
+package net.mantori.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.mantori.Mantori;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -20,6 +21,6 @@ public class ModWorldGenerator extends FabricDynamicRegistryProvider {
 
     @Override
     public String getName() {
-        return "mantori";
+        return Mantori.MOD_ID;
     }
 }

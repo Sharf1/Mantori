@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ModConfiguredFeatures {
 
-    public static final RegistryKey<ConfiguredFeature<?,?>> BEETLEBERRY_BUSH_KEY = registerKey("beetlberry_bush");
+    public static final RegistryKey<ConfiguredFeature<?,?>> BEETLEBERRY_BUSH_KEY = registerKey("beetleberry_bush");
     public static final RegistryKey<ConfiguredFeature<?,?>> END_GRASS_KEY = registerKey("end_grass");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?,?>> context) {

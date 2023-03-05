@@ -23,6 +23,9 @@
     ],
     "main": [
       "net.mantori.Mantori"
+    ],
+    "fabric-datagen": [
+      "net.mantori.data.ModDataGeneration"
     ]
   },
   "mixins": [
