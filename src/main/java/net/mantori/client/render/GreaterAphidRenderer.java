@@ -4,7 +4,9 @@ import com.google.common.collect.Maps;
 import net.mantori.Mantori;
 import net.mantori.client.model.GreaterAphidModel;
 import net.mantori.entity.custom.GreaterAphidEntity;
+import net.mantori.entity.custom.LesserAphidEntity;
 import net.mantori.entity.variants.GreaterAphidVariant;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -13,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
@@ -40,15 +43,20 @@ public class GreaterAphidRenderer extends GeoEntityRenderer<GreaterAphidEntity> 
 
     public GreaterAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx, new GreaterAphidModel());
-        addRenderLayer(new AutoGlowingGeoLayer<>(this));
+        this.shadowRadius = 1.4f;
     }
 
     @Override
-    public Identifier getTexture(GreaterAphidEntity entity) {
+    public Identifier getTextureLocation(GreaterAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/greater_aphid/greater_child.png");
         else return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
 
+
+    @Override
+    public RenderLayer getRenderType(GreaterAphidEntity animatable, Identifier texture, @Nullable VertexConsumerProvider bufferSource, float partialTick) {
+        return super.getRenderType(animatable, texture, bufferSource, partialTick);
+    }
     @Override
     public void preRender(MatrixStack stack, GreaterAphidEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer,
                           float partialTick, int packedLight, int packedOverlay, float red, float green, float blue,

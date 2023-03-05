@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
@@ -44,16 +45,19 @@ public class LesserAphidRenderer extends GeoEntityRenderer<LesserAphidEntity> {
 
     public LesserAphidRenderer(EntityRendererFactory.Context ctx) {
         super(ctx,new LesserAphidModel());
-
-        addRenderLayer(new AutoGlowingGeoLayer<>(this));
+        this.shadowRadius = 0.4f;
     }
 
     @Override
-    public Identifier getTexture(LesserAphidEntity entity) {
+    public Identifier getTextureLocation(LesserAphidEntity entity) {
         if (entity.isBaby()) return new Identifier(Mantori.MOD_ID, "textures/entity/lesser_aphid/lesser_child.png");
         else return LOCATION_BY_VARIANT.get(entity.getVariant());
     }
 
+    @Override
+    public RenderLayer getRenderType(LesserAphidEntity animatable, Identifier texture, @Nullable VertexConsumerProvider bufferSource, float partialTick) {
+        return super.getRenderType(animatable, texture, bufferSource, partialTick);
+    }
     @Override
     public void preRender(MatrixStack stack, LesserAphidEntity animatable, BakedGeoModel model, VertexConsumerProvider bufferSource, VertexConsumer buffer,
                           float partialTick, int packedLight, int packedOverlay, float red, float green, float blue,
