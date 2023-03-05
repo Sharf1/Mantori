@@ -430,7 +430,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
     }
 
     protected void playJumpSound() {
-        this.playSound(ModSounds.JUMP, 0.4f, 1.0f);
+        this.playSound(ModSounds.JUMP, 0.5f, 1.0f);
     }
 
 
