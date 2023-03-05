@@ -1,5 +1,6 @@
 package net.mantori.entity.variants;
 
+
 import net.minecraft.util.Util;
 import net.minecraft.util.math.random.Random;
 

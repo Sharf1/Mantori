@@ -12,15 +12,15 @@ import net.minecraft.world.biome.BiomeKeys;
 
 public class ModEntitySpawn {
     public static void addEntitySpawn() {
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.THE_END), SpawnGroup.CREATURE,
-                ModEntities.LESSER_APHID, 80, 2, 6);
-        BiomeModifications.addSpawn(BiomeSelectors.includeByKey(BiomeKeys.THE_END), SpawnGroup.CREATURE,
+        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
+                ModEntities.LESSER_APHID, 80, 4, 10);
+        BiomeModifications.addSpawn(BiomeSelectors.foundInTheEnd(), SpawnGroup.CREATURE,
                 ModEntities.GREATER_APHID, 70, 2, 4);
 
         SpawnRestriction.register(ModEntities.LESSER_APHID, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LesserAphidEntity::canSpawnIgnoreLightLevel);
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, LesserAphidEntity::canSpawn);
         SpawnRestriction.register(ModEntities.GREATER_APHID, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GreaterAphidEntity::canSpawnIgnoreLightLevel);
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GreaterAphidEntity::canSpawn);
     }
 
 

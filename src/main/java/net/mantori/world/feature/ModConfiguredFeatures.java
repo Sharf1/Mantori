@@ -22,14 +22,14 @@ public class ModConfiguredFeatures {
 
         register(context, BEETLEBERRY_BUSH_KEY, Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
-                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.BEETLEBERRY_BUSH.getDefaultState().with(BeetleberryBushBlock.AGE, 3))), List.of(Blocks.END_STONE), 8));
+                        new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.BEETLEBERRY_BUSH.getDefaultState().with(BeetleberryBushBlock.AGE, 3))), List.of(Blocks.END_STONE), 32));
         register(context, END_GRASS_KEY, Feature.RANDOM_PATCH,
                 ConfiguredFeatures.createRandomPatchFeatureConfig(Feature.SIMPLE_BLOCK,
                         new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.END_GRASS)), List.of(Blocks.END_STONE), 32));
     }
 
 
-    public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
+    public static RegistryKey<ConfiguredFeature<?,?>> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, new Identifier(Mantori.MOD_ID, name));
     }
 

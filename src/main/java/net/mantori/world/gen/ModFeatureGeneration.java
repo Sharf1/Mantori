@@ -8,12 +8,12 @@ import net.minecraft.world.gen.GenerationStep;
 
 public class ModFeatureGeneration {
     public static void generateBushes() {
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.THE_END),
+        BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
                 GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.BEETLEBERRY_BUSH_PLACED_KEY);
     }
 
     public static void generateGrass() {
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(BiomeKeys.THE_END),
+        BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(),
                 GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.END_GRASS_PLACED_KEY);
     }
 }

@@ -20,11 +20,11 @@ public class ModPlacedFeatures {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
         register(context, BEETLEBERRY_BUSH_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.BEETLEBERRY_BUSH_KEY),
-                RarityFilterPlacementModifier.of(384), SquarePlacementModifier.of(),
+                RarityFilterPlacementModifier.of(16), SquarePlacementModifier.of(),
                 PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP, BiomePlacementModifier.of());
 
         register(context, END_GRASS_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.END_GRASS_KEY),
-                RarityFilterPlacementModifier.of(20), SquarePlacementModifier.of(),
+                RarityFilterPlacementModifier.of(16), SquarePlacementModifier.of(),
                 PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP, BiomePlacementModifier.of());
     }
 
