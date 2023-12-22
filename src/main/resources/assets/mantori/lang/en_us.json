@@ -56,6 +56,9 @@
   "enchantment.mantori.cursed_thorns": "Thorns",
   "enchantment.mantori.end_breaker": "Ender Breaker",
   "enchantment.mantori.shulkers_blessing": "Shulker's Blessing",
-
+  "enchantment.mantori.cursed_thorns.desc": "Causes damage to enemies when they attack you",
+  "enchantment.mantori.end_breaker.desc": "Increases mining speed to end related blocks",
+  "enchantment.mantori.shulkers_blessing.desc": "Causes enemies to levitate on hit",
+  
   "itemGroup.mantori.mantori": "Aphid Additions"
 }
