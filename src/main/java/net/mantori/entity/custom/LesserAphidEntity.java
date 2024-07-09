@@ -1,13 +1,30 @@
 package net.mantori.entity.custom;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.mantori.entity.ModEntities;
 import net.mantori.entity.goals.JumpAroundGoal;
 import net.mantori.entity.variants.LesserAphidVariant;
+import net.mantori.interfaces.LivingEntityOffGroundSpeedView;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -30,8 +47,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.*;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -55,6 +74,8 @@ public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
         this.ignoreCameraFrustum = true;
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0f);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0f);
+        // added for 1.20.x
+        ((LivingEntityOffGroundSpeedView) this).setOffGroundSpeed(this.getMovementSpeed());
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -88,7 +109,7 @@ public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
             player.playSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
             ItemStack itemStack2 = ItemUsage.exchangeStack(itemStack, player, ModItems.HONEYDEW_BOTTLE.getDefaultStack());
             player.setStackInHand(hand, itemStack2);
-            return ActionResult.success(this.world.isClient);
+            return ActionResult.success(this.getWorld().isClient);
         } else {
             return super.interactMob(player, hand);
         }
@@ -203,7 +224,7 @@ public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
         return factory;
     }
     public boolean isInAir() {
-        return !this.onGround;
+        return !this.isOnGround();
     }
 
     public static boolean canSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -225,9 +246,9 @@ public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
                 bl = true;
             }
         } else {
-            entityData = new LesserData(LesserAphidVariant.getRandomNatural(this.world.random), LesserAphidVariant.getRandomNatural(this.world.random));
+            entityData = new LesserData(LesserAphidVariant.getRandomNatural(this.getWorld().random), LesserAphidVariant.getRandomNatural(this.getWorld().random));
         }
-        this.setVariant(((LesserData)entityData).getRandomVariant(this.world.random));
+        this.setVariant(((LesserData)entityData).getRandomVariant(this.getWorld().random));
         if (bl) {
             this.setBreedingAge(-24000);
         }

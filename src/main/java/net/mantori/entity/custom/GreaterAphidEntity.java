@@ -1,14 +1,34 @@
 package net.mantori.entity.custom;
 
+import java.util.Arrays;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.mantori.entity.ModEntities;
 import net.mantori.entity.variants.GreaterAphidVariant;
+import net.mantori.interfaces.LivingEntityOffGroundSpeedView;
 import net.mantori.item.ModItems;
 import net.mantori.mixin.HorseBaseEntityAccessor;
 import net.mantori.sounds.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.HorseBondWithPlayerGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -16,7 +36,9 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.AbstractHorseEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,24 +53,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.EntityView;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.constant.DefaultAnimations;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
-
-import java.util.Arrays;
 
 public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity {
     private static final Item[] BREEDING_INGREDIENT = {ModItems.BEETLEBERRY};
@@ -64,6 +79,8 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         this.ignoreCameraFrustum = true;
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0f);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0f);
+        // added for 1.20.x
+        ((LivingEntityOffGroundSpeedView) this).setOffGroundSpeed(this.getMovementSpeed());;
     }
 
     @Override
@@ -189,9 +206,9 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
                 bl = true;
             }
         } else {
-            entityData = new GreaterAphidEntity.GreaterData(GreaterAphidVariant.getRandomNatural(this.world.random), GreaterAphidVariant.getRandomNatural(this.world.random));
+            entityData = new GreaterAphidEntity.GreaterData(GreaterAphidVariant.getRandomNatural(this.getWorld().random), GreaterAphidVariant.getRandomNatural(this.getWorld().random));
         }
-        this.setVariant(((GreaterAphidEntity.GreaterData)entityData).getRandomVariant(this.world.random));
+        this.setVariant(((GreaterAphidEntity.GreaterData)entityData).getRandomVariant(this.getWorld().random));
         if (bl) {
             this.setBreedingAge(-24000);
         }
@@ -250,7 +267,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         if (!this.isBaby()) {
             if (this.isTame() && player.shouldCancelInteraction()) {
                 this.openInventory(player);
-                return ActionResult.success(this.world.isClient);
+                return ActionResult.success(this.getWorld().isClient);
             }
 
             if (this.hasPassengers()) {
@@ -270,7 +287,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
 
             if (!this.isTame()) {
                 this.playAngrySound();
-                return ActionResult.success(this.world.isClient);
+                return ActionResult.success(this.getWorld().isClient);
             }
         }
 
@@ -278,7 +295,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
             return super.interactMob(player, hand);
         } else {
             this.putPlayerOnBack(player);
-            return ActionResult.success(this.world.isClient);
+            return ActionResult.success(this.getWorld().isClient);
         }
     }
     public ActionResult interactBird(PlayerEntity player, ItemStack stack) {
@@ -286,7 +303,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         if (!player.getAbilities().creativeMode) {
             stack.decrement(1);
         }
-        if (this.world.isClient) {
+        if (this.getWorld().isClient) {
             return ActionResult.CONSUME;
         }
         return bl ? ActionResult.SUCCESS : ActionResult.PASS;
@@ -299,7 +316,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         if (item.isOf(ModItems.BEETLEBERRY)) {
             health = 10.0f;
             temper = 10;
-            if (!this.world.isClient && this.isTame() && this.getBreedingAge() == 0 && !this.isInLove()) {
+            if (!this.getWorld().isClient && this.isTame() && this.getBreedingAge() == 0 && !this.isInLove()) {
                 bl = true;
                 this.lovePlayer(player);
             }
@@ -310,7 +327,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         }
         if (temper > 0 && (bl || !this.isTame()) && this.getTemper() < this.getMaxTemper()) {
             bl = true;
-            if (!this.world.isClient) {
+            if (!this.getWorld().isClient) {
                 this.addTemper(temper);
             }
         }
@@ -325,7 +342,7 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
         ((HorseBaseEntityAccessor)this).invokeSetEating();
         this.eatingTicks = 10;
         if (!this.isSilent() && (soundEvent = this.getEatSound()) != null) {
-            this.world.playSound(null, this.getX(), this.getY(), this.getZ(), soundEvent, this.getSoundCategory(), 1.0f, 1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f);
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), soundEvent, this.getSoundCategory(), 1.0f, 1.0f + (this.random.nextFloat() - this.random.nextFloat()) * 0.2f);
         }
     }
 
@@ -371,7 +388,8 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
     @Override
     public void travel(Vec3d movementInput) {
         if (this.isAlive()) {
-            LivingEntity livingEntity = this.getPrimaryPassenger();
+            //LivingEntity livingEntity = this.getPrimaryPassenger();
+        	LivingEntity livingEntity = this.getControllingPassenger();
             if (this.hasPassengers() && livingEntity != null) {
                 this.setYaw(livingEntity.getYaw());
                 this.prevYaw = this.getYaw();
@@ -386,12 +404,12 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
                     this.soundTicks = 0;
                 }
 
-                if (this.onGround && this.jumpStrength == 0.0F && this.isAngry() && !this.jumping) {
+                if (this.isOnGround() && this.jumpStrength == 0.0F && this.isAngry() && !this.jumping) {
                     f = 0.0F;
                     g = 0.0F;
                 }
 
-                if (this.jumpStrength > 0.0F && !this.isInAir() && this.onGround) {
+                if (this.jumpStrength > 0.0F && !this.isInAir() && this.isOnGround()) {
                     double d = this.getJumpStrength() * (double)this.jumpStrength * (double)this.getJumpVelocityMultiplier();
                     double e = d + this.getJumpBoostVelocityModifier();
                     Vec3d vec3d = this.getVelocity();
@@ -407,7 +425,9 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
                     this.jumpStrength = 0.0F;
                 }
 
-                this.airStrafingSpeed = this.getMovementSpeed() * 0.1F;
+                //this.airStrafingSpeed = this.getMovementSpeed() * 0.1F;
+                ((LivingEntityOffGroundSpeedView) this).setOffGroundSpeed(this.getMovementSpeed() * 0.1f);
+                //
                 if (this.isLogicalSideForUpdatingMovement()) {
                     this.setMovementSpeed((float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
                     super.travel(new Vec3d((double)f, movementInput.y, (double)g));
@@ -415,15 +435,16 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
                     this.setVelocity(Vec3d.ZERO);
                 }
 
-                if (this.onGround) {
+                if (this.isOnGround()) {
                     this.jumpStrength = 0.0F;
                     this.setInAir(false);
                 }
 
-                this.updateLimbs(this, false);
+                this.updateLimbs(false);
                 this.tryCheckBlockCollision();
             } else {
-                this.airStrafingSpeed = 0.02F;
+                //this.airStrafingSpeed = 0.02F;
+            	((LivingEntityOffGroundSpeedView) this).setOffGroundSpeed(0.02f);
                 super.travel(movementInput);
             }
         }
@@ -461,8 +482,8 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
 
 
     protected void playStepSound(BlockPos pos, BlockState state) {
-        if (!state.getMaterial().isLiquid()) {
-            BlockState blockState = this.world.getBlockState(pos.up());
+        if (!state.isLiquid()) {
+            BlockState blockState = this.getWorld().getBlockState(pos.up());
             BlockSoundGroup blockSoundGroup = state.getSoundGroup();
             if (blockState.isOf(Blocks.SNOW)) {
                 blockSoundGroup = blockState.getSoundGroup();
@@ -506,5 +527,10 @@ public class GreaterAphidEntity extends AbstractHorseEntity implements GeoEntity
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
     }
+
+	@Override
+	public /* synthetic */ EntityView method_48926() {
+		return super.getWorld();
+	}
 
 }

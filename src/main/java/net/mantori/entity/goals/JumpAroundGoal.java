@@ -1,12 +1,13 @@
 package net.mantori.entity.goals;
 
+import java.util.EnumSet;
+
+import org.jetbrains.annotations.Nullable;
+
 import net.mantori.entity.custom.LesserAphidEntity;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.Vec3d;
-
-import javax.annotation.Nullable;
-import java.util.EnumSet;
 
 public class JumpAroundGoal extends Goal {
     public static final int DEFAULT_CHANCE = 120;

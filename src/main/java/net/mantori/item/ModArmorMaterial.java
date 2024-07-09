@@ -1,13 +1,13 @@
 package net.mantori.item;
 
-import net.minecraft.entity.EquipmentSlot;
+import java.util.function.Supplier;
+
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Lazy;
-
-import java.util.function.Supplier;
 
 public enum ModArmorMaterial implements ArmorMaterial {
    CHITIN("chitin", 15, new int[]{3, 5, 7, 3}, 25, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0f, -0.1f, () -> Ingredient.ofItems(ModItems.CHITIN_SHELL)),;
@@ -34,13 +34,14 @@ public enum ModArmorMaterial implements ArmorMaterial {
     }
 
     @Override
-    public int getDurability(EquipmentSlot slot) {
-        return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;
+    public int getDurability(ArmorItem.Type type) {
+        //return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;
+    	return BASE_DURABILITY[type.getEquipmentSlot().getEntitySlotId()] * this.durabilityMultiplier;
     }
 
     @Override
-    public int getProtectionAmount(EquipmentSlot slot) {
-        return this.protectionAmounts[slot.getEntitySlotId()];
+    public int getProtection(ArmorItem.Type type) {
+        return this.protectionAmounts[type.getEquipmentSlot().getEntitySlotId()];
     }
 
     @Override

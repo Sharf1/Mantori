@@ -1,18 +1,30 @@
 package net.mantori.item;
 
+import static net.minecraft.item.Items.GLASS_BOTTLE;
+
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.mantori.Mantori;
 import net.mantori.block.ModBlocks;
 import net.mantori.entity.ModEntities;
-import net.mantori.item.custom.*;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.*;
+import net.mantori.item.custom.JarItem;
+import net.mantori.item.custom.ModArmorItem;
+import net.mantori.item.custom.ModAxeItem;
+import net.mantori.item.custom.ModHoeItem;
+import net.mantori.item.custom.ModPickaxeItem;
+import net.mantori.item.custom.ModShovelItem;
+import net.mantori.item.custom.ModSwordItem;
+import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.ArmorItem.Type;
+import net.minecraft.item.HoneyBottleItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
-
-import static net.minecraft.item.Items.GLASS_BOTTLE;
 
 public class ModItems {
     public static final Item CHITIN_SHELL = registerItem("chitin",
@@ -65,16 +77,16 @@ public class ModItems {
                     new FabricItemSettings()));
 
     public static final Item CHITIN_HELMET = registerItem("chitin_helmet",
-            new ModArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.HEAD,
+            new ModArmorItem(ModArmorMaterial.CHITIN, Type.HELMET,
                     new FabricItemSettings()));
     public static final Item CHITIN_CHESTPLATE = registerItem("chitin_chestplate",
-            new ModArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.CHEST,
+            new ModArmorItem(ModArmorMaterial.CHITIN, Type.CHESTPLATE,
                     new FabricItemSettings()));
     public static final Item CHITIN_LEGGINGS = registerItem("chitin_leggings",
-            new ModArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.LEGS,
+            new ModArmorItem(ModArmorMaterial.CHITIN, Type.LEGGINGS,
                     new FabricItemSettings()));
     public static final Item CHITIN_BOOTS = registerItem("chitin_boots",
-            new ModArmorItem(ModArmorMaterial.CHITIN, EquipmentSlot.FEET,
+            new ModArmorItem(ModArmorMaterial.CHITIN, Type.BOOTS,
                     new FabricItemSettings()));
 
     public static final Item GREATER_APHID_SPAWN_EGG = registerItem("greater_aphid_spawn_egg", new SpawnEggItem(ModEntities.GREATER_APHID, 3947078, 6900102,
@@ -119,36 +131,36 @@ public class ModItems {
         addToItemGroup(ItemGroups.NATURAL, BEETLEBERRY);
 
 
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_SHELL);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_SPIKE);
-        addToItemGroup(ModItemGroup.MANTORI, GREATER_APHID_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.MANTORI, LESSER_APHID_SPAWN_EGG);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_SWORD);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_AXE);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_HELMET);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_CHESTPLATE);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_LEGGINGS);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_BOOTS);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_SHOVEL);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_PICKAXE);
-        addToItemGroup(ModItemGroup.MANTORI, CHITIN_HOE);
-        addToItemGroup(ModItemGroup.MANTORI, APHID_MEAT);
-        addToItemGroup(ModItemGroup.MANTORI, COOKED_APHID_MEAT);
-        addToItemGroup(ModItemGroup.MANTORI, HONEYGLAZED_APHID_MEAT);
-        addToItemGroup(ModItemGroup.MANTORI, ELYTRA_SHARD);
-        addToItemGroup(ModItemGroup.MANTORI, END_WING);
-        addToItemGroup(ModItemGroup.MANTORI, GLAZED_WING);
-        addToItemGroup(ModItemGroup.MANTORI, HOT_WING);
-        addToItemGroup(ModItemGroup.MANTORI, HONEYDEW_BOTTLE);
-        addToItemGroup(ModItemGroup.MANTORI, BEETLEBERRY_JAM);
-        addToItemGroup(ModItemGroup.MANTORI, HOT_SAUCE);
-        addToItemGroup(ModItemGroup.MANTORI, DRAGONS_BREATH_SEED);
-        addToItemGroup(ModItemGroup.MANTORI, DRAGONS_BREATH);
-        addToItemGroup(ModItemGroup.MANTORI, BEETLEBERRY);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_SHELL);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_SPIKE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, GREATER_APHID_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, LESSER_APHID_SPAWN_EGG);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_SWORD);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_AXE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_HELMET);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_CHESTPLATE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_LEGGINGS);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_BOOTS);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_SHOVEL);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_PICKAXE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, CHITIN_HOE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, APHID_MEAT);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, COOKED_APHID_MEAT);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, HONEYGLAZED_APHID_MEAT);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, ELYTRA_SHARD);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, END_WING);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, GLAZED_WING);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, HOT_WING);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, HONEYDEW_BOTTLE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, BEETLEBERRY_JAM);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, HOT_SAUCE);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, DRAGONS_BREATH_SEED);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, DRAGONS_BREATH);
+        addToItemGroup(ModItemGroup.MANTORI_KEY, BEETLEBERRY);
 
     }
 
-    public static void addToItemGroup(ItemGroup group, Item item) {
+    public static void addToItemGroup(RegistryKey<ItemGroup> group, Item item) {
         ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
     }
 

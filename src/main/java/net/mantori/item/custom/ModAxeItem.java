@@ -1,19 +1,16 @@
 package net.mantori.item.custom;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.mantori.enchantments.ModEnchantments;
 import net.mantori.interfaces.InitialStackStateProvider;
 import net.mantori.item.ModToolMaterial;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ModAxeItem extends AxeItem implements InitialStackStateProvider {
     public ModAxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings) {

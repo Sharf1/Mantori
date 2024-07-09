@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
+	id 'fabric-loom' version "1.7-SNAPSHOT"
 	id 'maven-publish'
 }
 
@@ -12,7 +12,18 @@ group = project.maven_group
 
 repositories {
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-	maven { url 'https://jitpack.io' }
+	maven { url 'https://jitpack.io'}
+	exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 
 }
 
@@ -22,8 +33,12 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "software.bernie.geckolib:geckolib-fabric-1.19.3:${project.geckolib}"
+	modImplementation "software.bernie.geckolib:geckolib-fabric-1.20.1:${project.geckolib}"
+	
 	modImplementation "com.github.quiqueck:BCLib:${project.bclib_version}"
+	modImplementation "com.github.quiqueck:WunderLib:${project.wunderlib_version}"
+	
+	modRuntimeOnly "maven.modrinth:no-chat-reports:Fabric-1.20.1-v2.2.2"
 }
 
 processResources {
@@ -53,6 +68,7 @@ loom {
 			runDir "build/datagen"
 		}
 	}
+	accessWidenerPath = file("src/main/resources/mantori.accesswidener")
 }
 
 sourceSets { main { resources { srcDirs += dataOutput } } }

@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-    @Inject(method="<init>(Lnet/minecraft/item/ItemConvertible;I)V", at=@At(value="INVOKE", target="Lnet/minecraft/item/ItemStack;updateEmptyState()V"))
+//    @Inject(method="<init>(Lnet/minecraft/item/ItemConvertible;I)V", at=@At(value="INVOKE", target="Lnet/minecraft/item/ItemStack;updateEmptyState()V"))
+	@Inject(method="<init>(Lnet/minecraft/item/ItemConvertible;I)V", at=@At("TAIL"))
     public void init(ItemConvertible itemConvertible, int i, CallbackInfo ci){
         ItemStack stack = (ItemStack) (Object)this;
         if (itemConvertible instanceof InitialStackStateProvider forced){
