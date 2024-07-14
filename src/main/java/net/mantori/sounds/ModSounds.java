@@ -1,9 +1,10 @@
 package net.mantori.sounds;
 
 import net.mantori.Mantori;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModSounds {
     public static SoundEvent WING_FLAP = registerSoundEvent("aphid.wing_flap");
@@ -21,9 +22,9 @@ public class ModSounds {
     public static SoundEvent FOOTSTEPS = registerSoundEvent("aphid.footstep");
     public static SoundEvent FOOTSTEPS_WOOD = registerSoundEvent("aphid.footstep.wood");
 
-    private static SoundEvent registerSoundEvent(String name) {
+    public static SoundEvent registerSoundEvent(String name) {
         Identifier id = new Identifier(Mantori.MOD_ID, name);
-        return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
+        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     };
 
     public static void registerSounds() {

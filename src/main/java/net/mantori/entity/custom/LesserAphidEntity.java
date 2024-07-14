@@ -1,13 +1,30 @@
 package net.mantori.entity.custom;
 
+import org.jetbrains.annotations.Nullable;
+
 import net.mantori.entity.ModEntities;
 import net.mantori.entity.goals.JumpAroundGoal;
 import net.mantori.entity.variants.LesserAphidVariant;
+import net.mantori.interfaces.LivingEntityOffGroundSpeedView;
 import net.mantori.item.ModItems;
 import net.mantori.sounds.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -30,19 +47,21 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.*;
-import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 
-public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
-    private AnimationFactory factory = new AnimationFactory(this);
+public class LesserAphidEntity extends AnimalEntity implements GeoEntity {
+    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
 
     public float maxWingDeviation;
@@ -55,6 +74,8 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         this.ignoreCameraFrustum = true;
         this.setPathfindingPenalty(PathNodeType.DANGER_FIRE, -1.0f);
         this.setPathfindingPenalty(PathNodeType.DAMAGE_FIRE, -1.0f);
+        // added for 1.20.x
+        ((LivingEntityOffGroundSpeedView) this).setOffGroundSpeed(this.getMovementSpeed());
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
@@ -88,7 +109,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
             player.playSound(SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, 1.0F, 1.0F);
             ItemStack itemStack2 = ItemUsage.exchangeStack(itemStack, player, ModItems.HONEYDEW_BOTTLE.getDefaultStack());
             player.setStackInHand(hand, itemStack2);
-            return ActionResult.success(this.world.isClient);
+            return ActionResult.success(this.getWorld().isClient);
         } else {
             return super.interactMob(player, hand);
         }
@@ -107,7 +128,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
     }
 
     private static boolean shouldBabyBeDifferent(Random random) {
-        return random.nextInt(50) == 0;
+        return random.nextInt(30) == 0;
     }
 
 
@@ -162,7 +183,7 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
         this.playSound(ModSounds.FOOTSTEPS, 0.15f, 1.0f);
     }
 
-    @Override
+
     protected boolean hasWings() {
         return this.speed > this.field_28640;
     }
@@ -175,31 +196,35 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
 
 
     @Override
-    public void registerControllers(AnimationData animationData) {
-        animationData.addAnimationController(new AnimationController<>(this, "locomotion_controller", 5, this::locomotion_predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar animationData) {
+        animationData.add(
+                LesserAphidEntity.genericWalkJumpIdleController(this)
+        );
     }
 
-    private <E extends IAnimatable> PlayState locomotion_predicate(AnimationEvent<E> event) {
-        LesserAphidEntity lesserAphid = (LesserAphidEntity) event.getAnimatable();
 
-
-        if (this.isTouchingWater()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.swim", true));
-        } else if (this.isInAir()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.fly", true));
-        } else if (event.isMoving()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.walk", true));
-        } else
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.lesser.idle", true));
-        return PlayState.CONTINUE;
+    public static <T extends Entity & GeoAnimatable> AnimationController<T> genericWalkJumpIdleController(T entity) {
+        return new AnimationController<T>(entity, "Walk/Run/Idle", 0, state -> {
+            if (state.isMoving()) {
+                return state.setAndContinue(entity.isOnGround() ? WALK : FLY);
+            }
+            else {
+                return state.setAndContinue(IDLE);
+            }
+        });
     }
+    public static final RawAnimation IDLE = RawAnimation.begin().thenLoop("misc.idle");
+    public static final RawAnimation WALK = RawAnimation.begin().thenLoop("move.walk");
+
+    public static final RawAnimation FLY = RawAnimation.begin().thenLoop("move.fly");
+
 
     @Override
-    public AnimationFactory getFactory() {
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
         return factory;
     }
     public boolean isInAir() {
-        return !this.onGround;
+        return !this.isOnGround();
     }
 
     public static boolean canSpawn(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
@@ -221,9 +246,9 @@ public class LesserAphidEntity extends AnimalEntity implements IAnimatable {
                 bl = true;
             }
         } else {
-            entityData = new LesserData(LesserAphidVariant.getRandomNatural(this.world.random), LesserAphidVariant.getRandomNatural(this.world.random));
+            entityData = new LesserData(LesserAphidVariant.getRandomNatural(this.getWorld().random), LesserAphidVariant.getRandomNatural(this.getWorld().random));
         }
-        this.setVariant(((LesserData)entityData).getRandomVariant(this.world.random));
+        this.setVariant(((LesserData)entityData).getRandomVariant(this.getWorld().random));
         if (bl) {
             this.setBreedingAge(-24000);
         }

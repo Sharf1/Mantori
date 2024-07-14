@@ -4,8 +4,9 @@ import net.mantori.Mantori;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ModEnchantments {
 
@@ -18,7 +19,7 @@ public class ModEnchantments {
             new ShulkersBlessing(Enchantment.Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
     private static Enchantment register(String name, Enchantment enchantment) {
-        return Registry.register(Registry.ENCHANTMENT, new Identifier(Mantori.MOD_ID, name), enchantment);
+        return Registry.register(Registries.ENCHANTMENT, new Identifier(Mantori.MOD_ID, name), enchantment);
     }
 
     public static void registerModEnchantments() {

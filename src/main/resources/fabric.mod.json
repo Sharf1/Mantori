@@ -23,21 +23,21 @@
     ],
     "main": [
       "net.mantori.Mantori"
+    ],
+    "fabric-datagen": [
+      "net.mantori.data.ModDataGeneration"
     ]
   },
   "mixins": [
     "mantori.mixins.json"
   ],
+  "accessWidener": "mantori.accesswidener",
 
   "depends": {
-    "fabricloader": "0.14.x",
-    "fabric": ">=0.60.0",
-    "minecraft": "1.19.2",
+    "fabricloader": ">=0.15",
+    "fabric": ">=0.90.0",
+    "minecraft": "1.20.1",
     "java": ">=17",
-    "bclib": "2.1.x",
-    "geckolib3": ">=3.1.26"
-  },
-  "breaks": {
-    "bclib": "<2.1.1"
+    "bclib": "3.0.x"
   }
 }
